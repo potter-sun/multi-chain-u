@@ -12,6 +12,8 @@ export default function Home() {
         symbol: 'ELF',
         owner: 'oTbTFJ6LyUDnJfkv13hpqHMVmTjQ417n78SiUpUUGC4672VFy', // owner caAddress
       },
+    }).then((res) => {
+      console.log('🌈 🌈 🌈 🌈 🌈 🌈 balance: ', res);
     });
   }, []);
 
