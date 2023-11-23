@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface CommonState {
-  setIsMobile: boolean;
+  isMobile: boolean;
 }
 
 export const initialState: CommonState = {
-  setIsMobile: false,
+  isMobile: false,
 };
 
 //it automatically uses the immer library to let you write simpler immutable updates with normal mutative code
@@ -14,7 +14,7 @@ export const CommonSlice = createSlice({
   initialState,
   reducers: {
     setIsMobile: (state, action: PayloadAction<boolean>) => {
-      state.setIsMobile = action.payload;
+      state.isMobile = action.payload;
     },
   },
 });
