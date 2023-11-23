@@ -1,12 +1,8 @@
 import { message } from 'antd';
-
-import BigNumber from 'bignumber.js';
-import { ContractBasic } from './contract';
 import AElf from 'aelf-sdk';
 import { AElfNodes, COMMON_PRIVATE } from 'constants/aelf';
 import request from '../api/axios';
 import descriptor from '@aelfqueen/protobufjs/ext/descriptor';
-import { timesDecimals } from './calculate';
 import { isSymbol } from './reg';
 import { SupportedELFChainId } from 'constants/chain';
 import storages from 'constants/storages';
@@ -33,31 +29,6 @@ export function getWallet() {
   if (!wallet) wallet = Wallet.getWalletByPrivateKey(COMMON_PRIVATE);
   return wallet;
 }
-
-export const approveELF = async (
-  address: string,
-  tokenContract: ContractBasic,
-  symbol = 'ELF',
-  amount: BigNumber | number | string,
-  chainId: ChainId,
-) => {
-  const approveResult = await tokenContract.callSendMethod('Approve', '', [
-    address,
-    symbol,
-    amount.toString(),
-  ]);
-  if (approveResult.error) {
-    message.error(
-      approveResult.error.message ||
-        approveResult?.errorMessage?.message ||
-        approveResult.errorMessage,
-    );
-    return false;
-  }
-  const { TransactionId } = approveResult.result || approveResult;
-  await MessageTxToExplore(chainId, TransactionId);
-  return true;
-};
 
 export function getBlockHeight(chainId: ChainId) {
   return getAElf(chainId).chain.getBlockHeight();
@@ -144,68 +115,7 @@ export async function MessageTxToExplore(
     }
   }
 }
-export const checkElfAllowanceAndApprove = async (
-  tokenContract: ContractBasic,
-  symbol: string,
-  address: string,
-  approveTargetAddress: string,
-  amount: string | number,
-  chainId: ChainId,
-): Promise<
-  | boolean
-  | {
-      error: Error;
-    }
-> => {
-  const [allowance, tokenInfo] = await Promise.all([
-    tokenContract.callViewMethod('GetAllowance', [symbol, address, approveTargetAddress]),
-    tokenContract.callViewMethod('GetTokenInfo', [symbol]),
-  ]);
-  if (allowance?.error) {
-    message.error(
-      allowance.error.message || allowance.errorMessage?.message || allowance.errorMessage,
-    );
-    return false;
-  }
-  const bigA = timesDecimals(amount, tokenInfo?.decimals ?? 8);
-  const allowanceBN = new BigNumber(allowance?.allowance);
-  if (allowanceBN.lt(bigA)) {
-    return await approveELF(approveTargetAddress, tokenContract, symbol, bigA, chainId);
-  }
-  return true;
-};
 
-export async function initContracts(
-  contracts: { [name: string]: string },
-  aelfInstance: any,
-  account?: string,
-) {
-  const contractList = Object.entries(contracts);
-  try {
-    const list = await Promise.all(
-      contractList.map(async ([, address]) => {
-        try {
-          const contract = await aelfInstance.chain.contractAt(
-            address,
-            account ? { address: account } : getWallet(),
-          );
-          return contract;
-        } catch (error) {
-          console.debug(error, aelfInstance, '=====contractAt');
-          return undefined;
-        }
-      }),
-    );
-    const obj: any = {};
-    contractList.forEach(([, value], index) => {
-      obj[value] = list[index];
-    });
-
-    return obj;
-  } catch (error) {
-    console.log(error, 'initContracts');
-  }
-}
 function setContractsFileDescriptorBase64(key: string, contracts: any) {
   localStorage.setItem(key, JSON.stringify(contracts));
 }
