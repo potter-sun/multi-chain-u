@@ -20,7 +20,13 @@
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-unsafe-assignment": 0,
     "@typescript-eslint/ban-ts-comment": 0,
-    "tsdoc/syntax": "warn"
+    "tsdoc/syntax": "warn",
+    "no-unused-vars": [
+      "warn",
+      {
+        "varsIgnorePattern": "_*"
+      }
+    ]
   },
   "env": {
     "browser": true,

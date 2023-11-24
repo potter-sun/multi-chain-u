@@ -2481,7 +2481,7 @@
     "@portkey/types" "1.0.0-alpha.4"
     "@types/readable-stream" "^2.3.15"
 
-"@portkey/provider-types@^1.0.1":
+"@portkey/provider-types@^1.0.1", "@portkey/provider-types@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@portkey/provider-types/-/provider-types-1.1.0.tgz#ab9e0f55093c84ff76c4c3a0cea37329d80ae2fb"
   integrity sha512-DLfAFVVJbZVH165PiKZYrhLktZi9QHXbSuBk8Dle/BmEVEfic/6yzzZPt1fGih2DtwKeX9MmzYuhvi9AG7HVvA==
