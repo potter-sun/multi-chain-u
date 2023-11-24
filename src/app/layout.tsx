@@ -2,10 +2,7 @@ import Script from 'next/script';
 import Layout from 'pageComponents/layout';
 import '@portkey/did-ui-react/dist/assets/index.css';
 import 'aelf-web-login/dist/assets/index.css';
-
-import 'styles/global.css';
-import 'styles/theme.css';
-import 'antd-mobile/es/global';
+import 'styles/global.scss';
 
 import Provider from 'provider';
 

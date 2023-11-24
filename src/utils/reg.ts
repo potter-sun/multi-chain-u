@@ -18,7 +18,10 @@ export function isUrl(string: string) {
     return false;
   }
 
-  if (localhostDomainRE.test(everythingAfterProtocol) || nonLocalhostDomainRE.test(everythingAfterProtocol)) {
+  if (
+    localhostDomainRE.test(everythingAfterProtocol) ||
+    nonLocalhostDomainRE.test(everythingAfterProtocol)
+  ) {
     return true;
   }
 

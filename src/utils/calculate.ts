@@ -15,7 +15,11 @@ export function divDecimals(a?: BigNumber.Value, decimals: string | number = 18)
   return bigA.div(`1e${decimals}`);
 }
 
-export function divDecimalsStr(a?: BigNumber.Value, decimals: string | number = 8, defaultVal = '--') {
+export function divDecimalsStr(
+  a?: BigNumber.Value,
+  decimals: string | number = 8,
+  defaultVal = '--',
+) {
   const n = divDecimals(a, decimals);
   return isEffectiveNumber(n) ? n.toFormat() : defaultVal;
 }

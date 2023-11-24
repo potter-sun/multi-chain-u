@@ -32,10 +32,11 @@ export default function Providers({ children }: { children: ReactNode }) {
           autoLogoutOnNetworkMismatch: false,
           autoLogoutOnAccountMismatch: false,
           autoLogoutOnChainMismatch: false,
-          onPluginNotFound: (openStore) => {},
+          onPluginNotFound: (openStore) => {
+            console.log('openStore:', openStore);
+          },
         }}
-        extraWallets={['discover']}
-      >
+        extraWallets={['discover']}>
         {children}
       </WebLoginProvider>
     </PortkeyProvider>

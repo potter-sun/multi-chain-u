@@ -1,4 +1,4 @@
-import GoogleAnalytics from 'components/GoogleAnalytics';
+// import GoogleAnalytics from 'components/GoogleAnalytics';
 import Head from 'next/head';
 import React from 'react';
 
@@ -9,15 +9,7 @@ export default function Header(props: DefaultHeadProps) {
     <div>
       {/* <GoogleAnalytics id={process.env.NEXT_PUBLIC_ANALYTICS_ID} /> */}
       <DefaultHead {...props} />
-      <h1
-        style={{
-          fontSize: '42px',
-          margin: '12px',
-        }}
-        className="w-full h-16 text-center"
-      >
-        Welcome to aelf!
-      </h1>
+      <h1>Welcome to aelf!</h1>
     </div>
   );
 }

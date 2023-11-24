@@ -29,7 +29,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <AntdLayout className={`multi-chain-wrapper`}>
       <Header />
-      <AntdLayout.Content className={`multi-chain-content min-h-[100vh] flex justify-center`}>
+      <AntdLayout.Content className={`multi-chain-content`}>
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </AntdLayout.Content>
     </AntdLayout>

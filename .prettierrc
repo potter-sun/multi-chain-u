@@ -1,4 +1,5 @@
 {
+  "jsxBracketSameLine": true,
   "singleQuote": true,
   "trailingComma": "all",
   "printWidth": 100,
@@ -8,6 +9,18 @@
       "files": ".prettierrc",
       "options": {
         "parser": "json"
+      }
+    },
+    {
+      "files": "*.css",
+      "options": {
+        "parser": "css"
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss"
       }
     }
   ]

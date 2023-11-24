@@ -19,7 +19,8 @@ export const isEffectiveNumber = (v: any) => {
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME || 'AppName';
 export const prefixCls = process.env.NEXT_PUBLIC_PREFIX;
 
-export const MaxUint256 = '115792089237316195423570985008687907853269984665640564039457584007913129639935';
+export const MaxUint256 =
+  '115792089237316195423570985008687907853269984665640564039457584007913129639935';
 
 export const CrossFeeToken = 'ELF';
 export const CrossFeeTokenDecimals = 8;

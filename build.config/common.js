@@ -1,4 +1,6 @@
 const rewritesConfig = require('./rewrites/index');
+const path = require('path');
+
 module.exports = {
   reactStrictMode: true,
   async rewrites() {
@@ -8,6 +10,9 @@ module.exports = {
     loader: 'akamai',
     path: '',
     domains: ['raw.githubusercontent.com'],
+  },
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
   },
 
   productionBrowserSourceMaps: true,

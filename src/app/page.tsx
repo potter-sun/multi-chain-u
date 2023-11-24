@@ -1,25 +1,28 @@
 'use client';
-import { useCallContract } from 'aelf-web-login';
-import { useEffect } from 'react';
+// import { useCallContract } from 'aelf-web-login';
+import clsx from 'clsx';
+// import { useEffect } from 'react';
+import styles from 'styles/pages/home.module.scss';
 
 export default function Home() {
-  const { callViewMethod } = useCallContract();
+  //   const { callViewMethod } = useCallContract();
 
-  useEffect(() => {
-    callViewMethod({
-      contractAddress: 'JRmBduh4nXWi1aXgdUsj5gJrzeZb2LxmrAbf7W99faZSvoAaE',
-      methodName: 'GetBalance',
-      args: {
-        symbol: 'ELF',
-        owner: 'oTbTFJ6LyUDnJfkv13hpqHMVmTjQ417n78SiUpUUGC4672VFy', // owner caAddress
-      },
-    }).then((res) => {
-      console.log('🌈 🌈 🌈 🌈 🌈 🌈 balance: ', res);
-    });
-  }, []);
+  //   useEffect(() => {
+  //     callViewMethod({
+  //       contractAddress: 'JRmBduh4nXWi1aXgdUsj5gJrzeZb2LxmrAbf7W99faZSvoAaE',
+  //       methodName: 'GetBalance',
+  //       args: {
+  //         symbol: 'ELF',
+  //         owner: 'oTbTFJ6LyUDnJfkv13hpqHMVmTjQ417n78SiUpUUGC4672VFy', // owner caAddress
+  //       },
+  //     }).then((res) => {
+  //       console.log('🌈 🌈 🌈 🌈 🌈 🌈 balance: ', res);
+  //     });
+  //   }, [callViewMethod]);
 
   return (
-    <div className="flex">
+    <div className={clsx('flex-row-between', styles.homePage)}>
+      <p>home</p>
       <p>home</p>
     </div>
   );
