@@ -1,6 +1,5 @@
 {
   "root": true,
-  "plugins": ["eslint-plugin-tsdoc"],
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
@@ -19,8 +18,7 @@
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/no-unsafe-assignment": 0,
-    "@typescript-eslint/ban-ts-comment": 0,
-    "tsdoc/syntax": "warn"
+    "@typescript-eslint/ban-ts-comment": 0
   },
   "env": {
     "browser": true,
