@@ -1,6 +1,9 @@
 import * as AELF from '../platform/AELF';
 import * as tDVV from '../platform/tDVV';
 import { SupportedELFChainId } from 'constants/chain';
+import { NetworkType } from '@portkey/provider-types';
+
+export const NETWORK_TYPE: NetworkType = 'MAIN';
 
 export const ACTIVE_CHAIN: any = {
   [SupportedELFChainId.AELF]: true,

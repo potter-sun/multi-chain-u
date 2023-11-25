@@ -4,9 +4,8 @@ import {
 } from '@reduxjs/toolkit';
 import { reduxStorageRoot } from 'constants/store';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-// import storage from 'redux-persist/es/storage';
 import CommonSlice from 'store/reducers/common/slice';
+import PortkeyWalletSlice from 'store/reducers/portkeyWallet/slice';
 import storage from './storage';
 
 interface ThunkOptions<E = any> {
@@ -25,6 +24,12 @@ export const commonPersistConfig = {
   blacklist: [''],
 };
 
+export const portkeyWalletPersistConfig = {
+  key: PortkeyWalletSlice.name,
+  storage,
+  blacklist: [''],
+};
+
 const reduxPersistConfig = {
   key: reduxStorageRoot,
   storage,
@@ -34,7 +39,7 @@ const reduxPersistConfig = {
 
   // Optionally, just specify the keys you DO want stored to persistence.
   // An empty array means 'don't store any reducers' -> infinite-red/ignite#409
-  whitelist: [CommonSlice.name],
+  whitelist: [CommonSlice.name, PortkeyWalletSlice.name],
   // More info here:  https://shift.infinite.red/shipping-persistant-reducers-7341691232b1
   // transforms: [SetTokenTransform],
 };
@@ -47,7 +52,9 @@ const defaultMiddlewareOptions: DefaultMiddlewareOptions = {
   },
 };
 
-export default {
+const storeProviderConfig = {
   reduxPersistConfig,
   defaultMiddlewareOptions,
 };
+
+export default storeProviderConfig;

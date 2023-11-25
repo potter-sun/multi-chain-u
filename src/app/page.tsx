@@ -1,12 +1,15 @@
 'use client';
-// import { useCallContract } from 'aelf-web-login';
+import { Button } from 'antd';
 import clsx from 'clsx';
-// import { useEffect } from 'react';
+import { usePortkeyProvider } from 'hooks/usePortkeyProvider';
+import { usePortkeyWallet } from 'store/Provider/hooks';
 import styles from 'styles/pages/home.module.scss';
 
 export default function Home() {
-  //   const { callViewMethod } = useCallContract();
+  const portkeyWallet = usePortkeyWallet();
+  const { activate } = usePortkeyProvider();
 
+  //   const { callViewMethod } = useCallContract();
   //   useEffect(() => {
   //     callViewMethod({
   //       contractAddress: 'JRmBduh4nXWi1aXgdUsj5gJrzeZb2LxmrAbf7W99faZSvoAaE',
@@ -21,9 +24,11 @@ export default function Home() {
   //   }, [callViewMethod]);
 
   return (
-    <div className={clsx('flex-row-between', styles.homePage)}>
-      <p>home</p>
-      <p>home</p>
+    <div className={clsx('flex-row-center-between', styles.homePage)}>
+      <Button type="primary" onClick={activate}>
+        connect wallet
+      </Button>
+      <h2>{portkeyWallet.name}</h2>
     </div>
   );
 }
