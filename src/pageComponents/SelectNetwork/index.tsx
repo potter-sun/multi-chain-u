@@ -2,10 +2,9 @@ import { Swap } from 'assets/images';
 import { useState } from 'react';
 import { NetworkItem } from 'types/api';
 import styles from './styles.module.scss';
-import { NetworkSelectForWeb } from 'pageComponents/NetworkSelect';
-import clsx from 'clsx';
 import { useCommon } from 'store/Provider/hooks';
 import NetworkSelectDrawer from 'pageComponents/NetworkSelectDrawer';
+import NetworkSelectDropdown from 'pageComponents/NetworkSelectDropdown';
 
 export function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
   const [isShowNetworkSelectDropdown, setIsShowNetworkSelectDropdown] = useState<boolean>(false);
@@ -38,7 +37,7 @@ export function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
           <Swap className={styles['select-network-swap-icon']} />
         </div>
       </div>
-      {/* TODO mask and mask close*/}
+
       {isMobile ? (
         <NetworkSelectDrawer
           open={isShowNetworkSelectDropdown}
@@ -48,19 +47,13 @@ export function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
           onSelect={onSelectNetwork}
         />
       ) : (
-        <div
-          className={clsx(
-            styles['network-select-dropdown'],
-            isShowNetworkSelectDropdown
-              ? styles['network-select-dropdown-show']
-              : styles['network-select-dropdown-hidden'],
-          )}>
-          <NetworkSelectForWeb
-            networkList={networkList}
-            selectedNetwork={selected?.network}
-            onSelect={onSelectNetwork}
-          />
-        </div>
+        <NetworkSelectDropdown
+          open={isShowNetworkSelectDropdown}
+          networkList={networkList}
+          selectedNetwork={selected?.network}
+          onSelect={onSelectNetwork}
+          onClose={() => setIsShowNetworkSelectDropdown(false)}
+        />
       )}
     </div>
   );
