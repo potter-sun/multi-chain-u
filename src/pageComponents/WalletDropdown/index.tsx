@@ -7,8 +7,8 @@ import Wallet from 'assets/images/wallet.svg';
 import styles from './styles.module.scss';
 
 export default function WalletDropdown() {
-  const { isMobile } = useCommon();
-  return isMobile ? (
+  const { isMobilePX } = useCommon();
+  return isMobilePX ? (
     <div className={clsx('flex-none', 'flex-center', styles['mobile-wallet-container'])}>
       <SmallWallet className={'flex-none'} />
     </div>

@@ -15,14 +15,14 @@ export default function SelectNetwork({ networkList }: { networkList: NetworkIte
     setSelected(item);
     setIsShowNetworkSelectDropdown(false);
   };
-  const { isMobile } = useCommon();
+  const { isMobilePX } = useCommon();
 
   return (
     <div className={styles['select-network']}>
       <div
         id="select-network-result"
         className={clsx(styles['select-network-result'], {
-          [styles['select-network-result-mobile']]: isMobile,
+          [styles['select-network-result-mobile']]: isMobilePX,
         })}
         onClick={() => setIsShowNetworkSelectDropdown(true)}>
         <div className={styles['select-network-label']}>From Network</div>
@@ -41,7 +41,7 @@ export default function SelectNetwork({ networkList }: { networkList: NetworkIte
         </div>
       </div>
 
-      {isMobile ? (
+      {isMobilePX ? (
         <NetworkSelectDrawer
           open={isShowNetworkSelectDropdown}
           onClose={() => setIsShowNetworkSelectDropdown(false)}

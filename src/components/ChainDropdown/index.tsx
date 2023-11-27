@@ -8,7 +8,7 @@ import { store } from 'store/Provider/store';
 import { CommonChainDropdownProps } from './types';
 
 export default function ChainDropdown() {
-  const { isMobile, chainId } = useCommon();
+  const { isMobilePX, chainId } = useCommon();
   useEffect(() => {
     if (!chainId) {
       store.dispatch(setChainId(ChainNameType.MainChain));
@@ -22,7 +22,7 @@ export default function ChainDropdown() {
       store.dispatch(setChainId(key as ChainNameType));
     },
   };
-  return isMobile ? (
+  return isMobilePX ? (
     <MobileChainDropdown {...dropdownProps} />
   ) : (
     <WebChainDropdown {...dropdownProps} />

@@ -4,6 +4,6 @@ import MobileContent from './MobileContent';
 import { useCommon } from 'store/Provider/hooks';
 
 export default function Content() {
-  const { isMobile } = useCommon();
-  return isMobile ? <MobileContent /> : <WebContent />;
+  const { isMobilePX } = useCommon();
+  return isMobilePX ? <MobileContent /> : <WebContent />;
 }

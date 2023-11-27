@@ -4,11 +4,11 @@ import { useCommon } from 'store/Provider/hooks';
 import styles from './styles.module.scss';
 
 export default function DepositDescription() {
-  const { isMobile } = useCommon();
+  const { isMobilePX } = useCommon();
   return (
     <div
       className={clsx(styles['description-wrapper'], {
-        [styles['mobile-description-wrapper']]: isMobile,
+        [styles['mobile-description-wrapper']]: isMobilePX,
       })}>
       <p>• Deposits will be credited and available for trading after Bundle 1 confirmation.</p>
       <p>

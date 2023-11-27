@@ -3,12 +3,14 @@ import { HomeMenuKey, ChainNameType } from 'constants/home';
 
 export interface CommonState {
   isMobile: boolean;
+  isMobilePX: boolean;
   activeMenuKey: HomeMenuKey;
   chainId: ChainNameType;
 }
 
 export const initialState: CommonState = {
   isMobile: false,
+  isMobilePX: false,
   activeMenuKey: HomeMenuKey.Deposit,
   chainId: ChainNameType.MainChain,
 };
@@ -21,6 +23,9 @@ export const CommonSlice = createSlice({
     setIsMobile: (state, action: PayloadAction<boolean>) => {
       state.isMobile = action.payload;
     },
+    setIsMobilePX: (state, action: PayloadAction<boolean>) => {
+      state.isMobilePX = action.payload;
+    },
     setActiveMenuKey: (state, action: PayloadAction<HomeMenuKey>) => {
       state.activeMenuKey = action.payload;
     },
@@ -30,6 +35,6 @@ export const CommonSlice = createSlice({
   },
 });
 
-export const { setIsMobile, setActiveMenuKey, setChainId } = CommonSlice.actions;
+export const { setIsMobile, setIsMobilePX, setActiveMenuKey, setChainId } = CommonSlice.actions;
 
 export default CommonSlice;
