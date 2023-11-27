@@ -2,6 +2,7 @@
 // import { useCallContract } from 'aelf-web-login';
 import clsx from 'clsx';
 // import { useEffect } from 'react';
+import Content from 'pageComponents/Content';
 import styles from 'styles/pages/home.module.scss';
 
 export default function Home() {
@@ -21,9 +22,8 @@ export default function Home() {
   //   }, [callViewMethod]);
 
   return (
-    <div className={clsx('flex-row-between', styles.homePage)}>
-      <p>home</p>
-      <p>home</p>
+    <div className={styles['content-wrapper']}>
+      <Content />
     </div>
   );
 }

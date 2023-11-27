@@ -1,0 +1,25 @@
+@import 'src/assets/theme/font.scss';
+@import 'src/assets/theme/color.scss';
+
+.address-text-title {
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 22px;
+  color: $secondary-text;
+  @extend .font-family-regular;
+}
+
+.address-text-content {
+  margin-right: 24px;
+  word-break: break-all;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $primary-text;
+  @extend .font-family-medium;
+}
+
+.address-text-copy {
+  width: 20px;
+  height: 20px;
+  background-color: #eee;
+}

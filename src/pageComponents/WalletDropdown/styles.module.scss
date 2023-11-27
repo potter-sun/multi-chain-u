@@ -1,0 +1,19 @@
+@import '/src/assets/theme/color.scss';
+@import 'src/assets/theme/font.scss';
+
+.mobile-wallet-container {
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border: 1px solid $border;
+  border-radius: 6px;
+}
+
+.web-wallet-icon {
+  margin-right: 8px;
+}
+
+.web-wallet-text {
+  color: $primary-text;
+  @extend .font-family-medium;
+}

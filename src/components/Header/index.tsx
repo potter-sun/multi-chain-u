@@ -1,15 +1,19 @@
 // import GoogleAnalytics from 'components/GoogleAnalytics';
 import Head from 'next/head';
 import React from 'react';
+import MobileHeader from './MobileHeader';
+import WebHeader from './WebHeader';
+import { useCommon } from 'store/Provider/hooks';
 
-export type DefaultHeadProps = { title?: string; description?: string };
+export type DefaultHeadProps = { title?: string; description?: string; };
 
 export default function Header(props: DefaultHeadProps) {
+  const { isMobile } = useCommon();
   return (
     <div>
       {/* <GoogleAnalytics id={process.env.NEXT_PUBLIC_ANALYTICS_ID} /> */}
       <DefaultHead {...props} />
-      <h1>Welcome to aelf!</h1>
+      {isMobile ? <MobileHeader /> : <WebHeader />}
     </div>
   );
 }
