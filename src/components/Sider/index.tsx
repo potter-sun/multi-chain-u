@@ -5,19 +5,8 @@ import clsx from 'clsx';
 import { setActiveMenuKey } from 'store/reducers/common/slice';
 import { store } from 'store/Provider/store';
 import { useCommon } from 'store/Provider/hooks';
-import { HomeMenuKey } from 'constants/home';
+import { HomeMenuKey, MENU_ITEMS } from 'constants/home';
 import styles from './styles.module.scss';
-
-const MENU_ITEMS = [
-  {
-    key: HomeMenuKey.Deposit,
-    label: HomeMenuKey.Deposit,
-  },
-  {
-    key: HomeMenuKey.Withdrawal,
-    label: HomeMenuKey.Withdrawal,
-  },
-];
 
 export default function Sider() {
   const { activeMenuKey } = useCommon();

@@ -3,6 +3,19 @@ export enum HomeMenuKey {
   Withdrawal = 'Withdrawal',
 }
 
+export const MENU_ITEMS = [
+  {
+    icon: 'xxx',
+    key: HomeMenuKey.Deposit,
+    label: HomeMenuKey.Deposit,
+  },
+  {
+    icon: 'xxx',
+    key: HomeMenuKey.Withdrawal,
+    label: HomeMenuKey.Withdrawal,
+  },
+];
+
 export enum ChainNameType {
   MainChain = 'MainChain AELF',
   SideChain = 'SideChain tDVV',

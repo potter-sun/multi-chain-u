@@ -19,14 +19,7 @@ export default function MobileSelectChain({
         <div className={styles['trigger-text']}>{selectedItem?.label}</div>
         <SmallDownIcon className={clsx('flex-none', styles['children-icon'])} />
       </div>
-      <CommonDrawer
-        destroyOnClose
-        placement="bottom"
-        title="Deposit to"
-        closable={true}
-        height="88%"
-        open={isDrawerOpen}
-        onClose={() => setIsDrawerOpen(false)}>
+      <CommonDrawer title="Deposit to" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
         {menuItems?.map((item) => (
           <div
             key={item.key}

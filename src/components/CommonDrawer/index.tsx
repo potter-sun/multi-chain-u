@@ -8,6 +8,9 @@ export default function CommonDrawer({ className, width, ...props }: DrawerProps
     <Drawer
       closable={true}
       closeIcon={<Close />}
+      destroyOnClose
+      placement="bottom"
+      height="88%"
       {...props}
       width={width ?? '100%'}
       className={clsx(styles['common-drawer'], className)}
