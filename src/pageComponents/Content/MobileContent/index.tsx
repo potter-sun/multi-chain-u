@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import SelectChain from 'components/SelectChain';
-import Address from 'components/Address';
+import CommonAddress from 'components/CommonAddress';
 import SelectNetwork from 'pageComponents/SelectNetwork';
 import DepositInfo from 'pageComponents/Deposit/DepositInfo';
 import DepositDescription from 'pageComponents/Deposit/DepositDescription';
@@ -34,7 +34,7 @@ export default function MobileContent() {
         />
         <div className={styles['data-divider']} />
         <div className={styles['data-address-wrapper']}>
-          <Address />
+          <CommonAddress />
         </div>
       </div>
       <div className={styles['info-wrapper']}>

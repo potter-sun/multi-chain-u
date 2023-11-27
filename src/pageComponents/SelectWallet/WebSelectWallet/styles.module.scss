@@ -1,0 +1,11 @@
+@import '/src/assets/theme/color.scss';
+@import 'src/assets/theme/font.scss';
+
+.wallet-icon {
+  margin-right: 8px;
+}
+
+.wallet-text {
+  color: $primary-text;
+  @extend .font-family-medium;
+}

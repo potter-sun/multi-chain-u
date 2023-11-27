@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import SelectChain from 'components/SelectChain';
 import CommonImage from 'components/CommonImage';
-import Address from 'components/Address';
+import CommonAddress from 'components/CommonAddress';
 import SelectNetwork from 'pageComponents/SelectNetwork';
 import DepositInfo from 'pageComponents/Deposit/DepositInfo';
 import DepositDescription from 'pageComponents/Deposit/DepositDescription';
@@ -34,7 +34,7 @@ export default function WebContent() {
       <div className={clsx('flex-row-center', styles['deposit-address-wrapper'])}>
         {/* <CommonImage src="..." alt="QR code" /> */}
         <div className={clsx('flex-none', styles['QR-code'])} />
-        <Address />
+        <CommonAddress />
       </div>
       <div className={styles['info-wrappers']}>
         <DepositInfo />
