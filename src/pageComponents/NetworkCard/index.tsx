@@ -41,12 +41,14 @@ export function NetworkCardForWeb({
   onClick,
 }: NetworkCardForWebProps) {
   return (
-    <div className={clsx(styles['network-card-for-web'], className)} onClick={onClick}>
-      <div className={styles['network-card-row']}>
+    <div
+      className={clsx('flex-column', styles['network-card-for-web'], className)}
+      onClick={onClick}>
+      <div className={clsx('flex-row-center-between', styles['network-card-row'])}>
         <span className={styles['network-card-network']}>{network}</span>
         <span className={styles['network-card-arrival-time']}>≈ {multiConfirmTime}</span>
       </div>
-      <div className={styles['network-card-row']}>
+      <div className={clsx('flex-row-center-between', styles['network-card-row'])}>
         <span className={styles['network-card-name']}>{name}</span>
         <span className={styles['network-card-confirm-time']}>{multiConfirm}</span>
       </div>
