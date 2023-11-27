@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import ChainDropdown from 'components/ChainDropdown';
+import SelectChain from 'components/SelectChain';
 import Address from 'components/Address';
 import SelectNetwork from 'pageComponents/SelectNetwork';
 import DepositInfo from 'pageComponents/Deposit/DepositInfo';
@@ -13,7 +13,7 @@ export default function MobileContent() {
     <div className={styles['content-wrapper']}>
       <div className={clsx('flex-center', styles['chain-wrapper'])}>
         <span className={styles['chain-text']}>to</span>
-        <ChainDropdown />
+        <SelectChain />
       </div>
       <div className={clsx('flex-row-content-center', styles['QR-code-wrapper'])}>
         <div className={clsx('flex-none', styles['QR-code'])} />

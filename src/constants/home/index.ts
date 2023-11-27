@@ -8,7 +8,12 @@ export enum ChainNameType {
   SideChain = 'SideChain tDVV',
 }
 
-export const CHAIN_LIST = [
+export interface ChainItem {
+  key: ChainNameType;
+  label: ChainNameType;
+}
+
+export const CHAIN_LIST: ChainItem[] = [
   {
     key: ChainNameType.MainChain,
     label: ChainNameType.MainChain,

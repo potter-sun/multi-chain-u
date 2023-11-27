@@ -4,7 +4,7 @@ import DownIcon from 'assets/images/down.svg';
 import clsx from 'clsx';
 import styles from './styles.module.scss';
 
-export default function BaseDropdown({ children, ...props }: DropdownProps) {
+export default function CommonDropdown({ children, ...props }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Dropdown

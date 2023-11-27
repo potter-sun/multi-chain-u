@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useCommon } from 'store/Provider/hooks';
-import BaseDropdown from 'components/BaseDropdown';
+import CommonDropdown from 'components/CommonDropdown';
 import SmallWallet from 'assets/images/smallWallet.svg';
 import Wallet from 'assets/images/wallet.svg';
 import styles from './styles.module.scss';
@@ -13,9 +13,9 @@ export default function WalletDropdown() {
       <SmallWallet className={'flex-none'} />
     </div>
   ) : (
-    <BaseDropdown menu={{ items: [] }}>
+    <CommonDropdown menu={{ items: [] }}>
       <Wallet className={clsx('flex-none', styles['web-wallet-icon'])} />
       <span className={styles['web-wallet-text']}>Portkey Wallet</span>
-    </BaseDropdown>
+    </CommonDropdown>
   );
 }
