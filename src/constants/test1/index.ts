@@ -1,6 +1,9 @@
 import * as AELF_Test from './AELF';
 import * as tDVV_Test from './tDVV';
 import { SupportedELFChainId } from 'constants/chain';
+import { NetworkType } from '@portkey/provider-types';
+
+export const NETWORK_TYPE: NetworkType = 'TESTNET';
 
 export const ACTIVE_CHAIN: any = {
   [SupportedELFChainId.AELF]: true,

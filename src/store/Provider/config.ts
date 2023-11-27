@@ -4,10 +4,9 @@ import {
 } from '@reduxjs/toolkit';
 import { reduxStorageRoot } from 'constants/store';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-// import storage from 'redux-persist/es/storage';
 import CommonSlice from 'store/reducers/common/slice';
-import storage from './storage';
+import PortkeyWalletSlice from 'store/reducers/portkeyWallet/slice';
+import storage from 'redux-persist/lib/storage';
 
 interface ThunkOptions<E = any> {
   extraArgument: E;
@@ -22,7 +21,13 @@ export interface DefaultMiddlewareOptions {
 export const commonPersistConfig = {
   key: CommonSlice.name,
   storage,
-  blacklist: [''],
+  // if you need add key for an existing slice, please use createMigrate.
+  // migrate: createMigrate(migrations, { debug: false}) // import { createMigrate } from 'redux-persist';
+};
+
+export const portkeyWalletPersistConfig = {
+  key: PortkeyWalletSlice.name,
+  storage,
 };
 
 const reduxPersistConfig = {
@@ -47,7 +52,9 @@ const defaultMiddlewareOptions: DefaultMiddlewareOptions = {
   },
 };
 
-export default {
+const storeProviderConfig = {
   reduxPersistConfig,
   defaultMiddlewareOptions,
 };
+
+export default storeProviderConfig;
