@@ -2,10 +2,14 @@
 import React, { useEffect, Suspense } from 'react';
 import { Layout as AntdLayout } from 'antd';
 import Header from 'components/Header';
+import Sider from 'components/Sider';
 import Loading from 'components/Loading';
 import { devices } from '@portkey/utils';
 import { setIsMobile } from 'store/reducers/common/slice';
 import { store } from 'store/Provider/store';
+import { useCommon } from 'store/Provider/hooks';
+import clsx from 'clsx';
+import styles from './styles.module.scss';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
@@ -26,12 +30,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       };
     }
   }, []);
+  const { isMobile } = useCommon();
   return (
-    <AntdLayout className={`multi-chain-wrapper`}>
+    <AntdLayout
+      className={clsx(
+        'multi-chain-wrapper',
+        styles['layout-wrapper'],
+        styles['layout-wrapper-weight'],
+      )}>
       <Header />
-      <AntdLayout.Content className={`multi-chain-content`}>
-        <Suspense fallback={<Loading />}>{children}</Suspense>
-      </AntdLayout.Content>
+      <AntdLayout className={styles['layout-content-wrapper']}>
+        {!isMobile && <Sider />}
+        <AntdLayout.Content className={`multi-chain-content`}>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+        </AntdLayout.Content>
+      </AntdLayout>
     </AntdLayout>
   );
 };

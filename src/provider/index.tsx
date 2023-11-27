@@ -37,7 +37,8 @@ export default function RootProviders({ children }: { children?: React.ReactNode
     <ConfigProvider
       locale={ANTD_LOCAL[language]}
       autoInsertSpaceInButton={false}
-      prefixCls={prefixCls}>
+      // prefixCls={prefixCls}
+    >
       <StoreProvider>
         <WebLoginProvider>{children}</WebLoginProvider>
       </StoreProvider>

@@ -1,0 +1,12 @@
+.layout-wrapper {
+  &.layout-wrapper-weight,
+  .layout-content-wrapper {
+    background-color: #fff;
+  }
+  &.layout-wrapper-weight {
+    height: 100vh;
+  }
+  .layout-content-wrapper {
+    flex-direction: row;
+  }
+}
