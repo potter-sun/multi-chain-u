@@ -8,7 +8,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 16px;
+    gap: 4px;
     border-radius: 6px;
     border: 1px solid $dividers;
     cursor: pointer;
@@ -24,6 +24,7 @@
     .select-network-label {
       color: $secondary-text;
       font-size: 14px;
+      line-height: 22px;
     }
     .select-network-value-row {
       display: flex;
@@ -55,6 +56,10 @@
         min-height: 20px;
       }
     }
+  }
+  .select-network-result-mobile {
+    padding: 16px 12px;
+    border: none;
   }
 
   .network-select-dropdown {

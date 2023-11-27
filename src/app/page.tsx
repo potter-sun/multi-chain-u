@@ -26,13 +26,14 @@ export default function Home() {
   //   }, [callViewMethod]);
 
   return (
-    // <div className={styles['content-wrapper']}>
-    //   <Content />
-    <div className={clsx('flex-row-center-between', styles.homePage)}>
-      <Button type="primary" onClick={activate}>
-        connect wallet
-      </Button>
-      <h2>{portkeyWallet.name}</h2>
+    <div className={styles['content-wrapper']}>
+      <Content />
     </div>
+    // <div className={clsx('flex-row-center-between', styles.homePage)}>
+    //   <Button type="primary" onClick={activate}>
+    //     connect wallet
+    //   </Button>
+    //   <h2>{portkeyWallet.name}</h2>
+    // </div>
   );
 }

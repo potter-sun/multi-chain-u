@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { useCommon } from 'store/Provider/hooks';
 import NetworkSelectDrawer from 'pageComponents/NetworkSelectDrawer';
 
-export function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
+export default function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
   const [isShowNetworkSelectDropdown, setIsShowNetworkSelectDropdown] = useState<boolean>(false);
   const [selected, setSelected] = useState<NetworkItem>();
 
@@ -21,7 +21,9 @@ export function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
     <div className={styles['select-network']}>
       <div
         id="select-network-result"
-        className={styles['select-network-result']}
+        className={clsx(styles['select-network-result'], {
+          [styles['select-network-result-mobile']]: isMobile,
+        })}
         onClick={() => setIsShowNetworkSelectDropdown(true)}>
         <div className={styles['select-network-label']}>From Network</div>
         <div className={styles['select-network-value-row']}>

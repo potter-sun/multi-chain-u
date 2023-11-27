@@ -18,7 +18,7 @@
 }
 
 .QR-code-wrapper,
-.address-wrapper,
+.data-wrapper,
 .info-wrapper {
   margin-bottom: 24px;
 }
@@ -29,8 +29,16 @@
   background-color: #eee;
 }
 
-.address-wrapper {
-  padding: 16px 12px;
-  border: 1px solid #eee;
+.data-wrapper {
+  border: 1px solid $dividers;
   border-radius: 6px;
+}
+
+.data-divider {
+  margin: 0px 12px;
+  border-top: 1px solid $dividers;
+}
+
+.data-address-wrapper {
+  padding: 16px 12px;
 }
