@@ -14,7 +14,7 @@ export default function NetworkSelectDrawer({
       placement="bottom"
       title="Select Network"
       closable={true}
-      height={724}
+      height="89%"
       {...props}>
       <NetworkSelectForMobile
         networkList={networkList}
