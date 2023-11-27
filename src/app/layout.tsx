@@ -6,11 +6,6 @@ import 'styles/global.scss';
 
 import Provider from 'provider';
 
-export const metadata = {
-  title: 'multi-chain',
-  description: 'multi-chain',
-};
-
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">

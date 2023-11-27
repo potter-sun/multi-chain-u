@@ -8,10 +8,12 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const useCommon = () => useAppSelector((state) => state.common);
+export const usePortkeyWallet = () => useAppSelector((state) => state.portkeyWallet);
 
 export const useLoading = () => {
   const _setLoading = useCallback(
-    (isLoading: boolean | number, loadingInfo?: LoadingInfoType) => setLoading(isLoading, loadingInfo),
+    (isLoading: boolean | number, loadingInfo?: LoadingInfoType) =>
+      setLoading(isLoading, loadingInfo),
     [],
   );
   return useMemo(() => ({ setLoading: _setLoading }), [_setLoading]);
