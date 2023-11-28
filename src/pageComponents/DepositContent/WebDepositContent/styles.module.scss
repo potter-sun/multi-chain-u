@@ -1,18 +1,5 @@
 @import 'src/assets/theme/font.scss';
 @import 'src/assets/theme/color.scss';
-@import 'src/styles/variable.scss';
-
-$content-min-margin-left: 40px;
-$breakpoint: $content-width + ($sider-width + $content-min-margin-left) * 2;
-
-.content-wrapper {
-  width: $content-width;
-  margin-left: calc((100vw - $content-width) / 2 - $sider-width);
-  padding-top: 40px;
-  @media screen and (max-width: $breakpoint) {
-    margin-left: $content-min-margin-left;
-  }
-}
 
 .chain-select-wrapper {
   margin-bottom: 48px;

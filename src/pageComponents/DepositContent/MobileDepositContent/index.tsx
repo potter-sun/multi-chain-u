@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import SelectChain from 'components/SelectChain';
-import CommonImage from 'components/CommonImage';
 import CommonAddress from 'components/CommonAddress';
 import SelectNetwork from 'pageComponents/SelectNetwork';
 import DepositInfo from 'pageComponents/Deposit/DepositInfo';
@@ -9,14 +8,17 @@ import DepositDescription from 'pageComponents/Deposit/DepositDescription';
 import { NetworkStatus } from 'types/api';
 import styles from './styles.module.scss';
 
-export default function WebContent() {
+export default function MobileDepositContent() {
   return (
-    <div className={clsx('flex-column', styles['content-wrapper'])}>
-      <div className={clsx('flex-row-center', styles['chain-select-wrapper'])}>
-        <span className={styles['deposit-text']}>Deposit USDT to</span>
+    <>
+      <div className={clsx('flex-center', styles['chain-wrapper'])}>
+        <span className={styles['chain-text']}>to</span>
         <SelectChain />
       </div>
-      <div className={styles['select-network-wrapper']}>
+      <div className={clsx('flex-row-content-center', styles['QR-code-wrapper'])}>
+        <div className={clsx('flex-none', styles['QR-code'])} />
+      </div>
+      <div className={styles['data-wrapper']}>
         <SelectNetwork
           networkList={[
             {
@@ -30,16 +32,15 @@ export default function WebContent() {
             },
           ]}
         />
+        <div className={styles['data-divider']} />
+        <div className={styles['data-address-wrapper']}>
+          <CommonAddress />
+        </div>
       </div>
-      <div className={clsx('flex-row-center', styles['deposit-address-wrapper'])}>
-        {/* <CommonImage src="..." alt="QR code" /> */}
-        <div className={clsx('flex-none', styles['QR-code'])} />
-        <CommonAddress />
-      </div>
-      <div className={styles['info-wrappers']}>
+      <div className={styles['info-wrapper']}>
         <DepositInfo />
       </div>
       <DepositDescription />
-    </div>
+    </>
   );
 }
