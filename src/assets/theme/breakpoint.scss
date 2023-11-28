@@ -13,6 +13,12 @@ $breakpoint-xl: 1024px;
   }
 }
 
+@mixin media-mobile-and-pad {
+  @media screen and (max-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
 @mixin media-web {
   @media screen and (min-width: #{$breakpoint-xl + 1}) {
     @content;

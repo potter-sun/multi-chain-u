@@ -5,8 +5,14 @@ type ValueType = string | number;
 
 export default function FormInputNumber<T extends ValueType>(props: InputNumberProps<T>) {
   return (
-    <div>
-      <InputNumber controls={false} precision={0} {...props} className={styles['input-number']} />
+    <div className={styles['input-number-wrapper']}>
+      <InputNumber
+        controls={false}
+        precision={0}
+        {...props}
+        className={styles['input-number']}
+        bordered={false}
+      />
     </div>
   );
 }

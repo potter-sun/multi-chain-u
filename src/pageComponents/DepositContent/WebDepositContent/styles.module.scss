@@ -1,17 +1,6 @@
 @import 'src/assets/theme/font.scss';
 @import 'src/assets/theme/color.scss';
 
-.chain-select-wrapper {
-  margin-bottom: 48px;
-}
-
-.deposit-text {
-  margin-right: 16px;
-  font-size: 24px;
-  line-height: 32px;
-  @extend .font-family-medium;
-}
-
 .select-network-wrapper,
 .deposit-address-wrapper,
 .info-wrappers {

@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import SelectChain from 'components/SelectChain';
+import SelectChainWrapper from 'pageComponents/SelectChainWrapper';
 import CommonAddress from 'components/CommonAddress';
 import SelectNetwork from 'pageComponents/SelectNetwork';
 import DepositInfo from 'pageComponents/Deposit/DepositInfo';
@@ -11,10 +11,7 @@ import styles from './styles.module.scss';
 export default function MobileDepositContent() {
   return (
     <>
-      <div className={clsx('flex-center', styles['chain-wrapper'])}>
-        <span className={styles['chain-text']}>to</span>
-        <SelectChain />
-      </div>
+      <SelectChainWrapper className={styles['deposit-select-chain-wrapper']} mobileLabel="to" />
       <div className={clsx('flex-row-content-center', styles['QR-code-wrapper'])}>
         <div className={clsx('flex-none', styles['QR-code'])} />
       </div>

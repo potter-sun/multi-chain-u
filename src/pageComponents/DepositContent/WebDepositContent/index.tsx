@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import SelectChain from 'components/SelectChain';
+import SelectChainWrapper from 'pageComponents/SelectChainWrapper';
 import CommonImage from 'components/CommonImage';
 import CommonAddress from 'components/CommonAddress';
 import SelectNetwork from 'pageComponents/SelectNetwork';
@@ -12,10 +12,7 @@ import styles from './styles.module.scss';
 export default function WebContent() {
   return (
     <>
-      <div className={clsx('flex-row-center', styles['chain-select-wrapper'])}>
-        <span className={styles['deposit-text']}>Deposit USDT to</span>
-        <SelectChain />
-      </div>
+      <SelectChainWrapper webLabel="Deposit USDT to" />
       <div className={styles['select-network-wrapper']}>
         <SelectNetwork
           networkList={[

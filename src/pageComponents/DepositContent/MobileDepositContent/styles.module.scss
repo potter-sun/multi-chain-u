@@ -1,16 +1,8 @@
 @import 'src/assets/theme/font.scss';
 @import 'src/assets/theme/color.scss';
 
-.chain-wrapper {
+.deposit-select-chain-wrapper {
   margin-bottom: 40px;
-}
-
-.chain-text {
-  margin-right: 8px;
-  font-size: 14px;
-  line-height: 22px;
-  color: $secondary-text;
-  @extend .font-family-regular;
 }
 
 .QR-code-wrapper,
