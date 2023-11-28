@@ -11,6 +11,7 @@
   .network-select-dropdown {
     position: absolute;
     top: 122px;
+    z-index: 10;
     width: 100%;
     border-radius: 6px;
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.12);

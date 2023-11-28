@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import AElf from 'aelf-sdk';
 import { AElfNodes, COMMON_PRIVATE } from 'constants/aelf';
-import request from '../api/axios';
+// import request from '../api/axios';
 import descriptor from '@aelfqueen/protobufjs/ext/descriptor';
 import { isSymbol } from './reg';
 import { SupportedELFChainId } from 'constants/chain';
@@ -123,38 +123,38 @@ function fileDescriptorSetFormatter(result: any) {
   const buffer = Buffer.from(result, 'base64');
   return descriptor.FileDescriptorSet.decode(buffer);
 }
-export async function getContractFileDescriptorSet(
-  chainId: ChainId,
-  address: string,
-): Promise<any> {
-  const key = storages.contractsFileDescriptorBase64 + chainId;
-  let base64s: any = localStorage.getItem(key);
-  const node = getNodeByChainId(chainId);
-  base64s = JSON.parse(base64s);
-  if (base64s && base64s[address]) {
-    try {
-      return fileDescriptorSetFormatter(base64s[address]);
-    } catch (error) {
-      delete base64s[address];
-      setContractsFileDescriptorBase64(key, base64s);
-      return getContractFileDescriptorSet(chainId, address);
-    }
-  } else {
-    try {
-      if (!base64s) base64s = {};
-      const base64 = await request.get(`${node.rpcUrl}/api/blockChain/contractFileDescriptorSet`, {
-        params: { address },
-      });
+// export async function getContractFileDescriptorSet(
+//   chainId: ChainId,
+//   address: string,
+// ): Promise<any> {
+//   const key = storages.contractsFileDescriptorBase64 + chainId;
+//   let base64s: any = localStorage.getItem(key);
+//   const node = getNodeByChainId(chainId);
+//   base64s = JSON.parse(base64s);
+//   if (base64s && base64s[address]) {
+//     try {
+//       return fileDescriptorSetFormatter(base64s[address]);
+//     } catch (error) {
+//       delete base64s[address];
+//       setContractsFileDescriptorBase64(key, base64s);
+//       return getContractFileDescriptorSet(chainId, address);
+//     }
+//   } else {
+//     try {
+//       if (!base64s) base64s = {};
+//       const base64 = await request.get(`${node.rpcUrl}/api/blockChain/contractFileDescriptorSet`, {
+//         params: { address },
+//       });
 
-      const fds = fileDescriptorSetFormatter(base64);
-      base64s[address] = base64;
-      setContractsFileDescriptorBase64(key, base64s);
-      return fds;
-    } catch (error) {
-      console.debug(error, '======getContractFileDescriptorSet');
-    }
-  }
-}
+//       const fds = fileDescriptorSetFormatter(base64);
+//       base64s[address] = base64;
+//       setContractsFileDescriptorBase64(key, base64s);
+//       return fds;
+//     } catch (error) {
+//       console.debug(error, '======getContractFileDescriptorSet');
+//     }
+//   }
+// }
 
 export const getServicesFromFileDescriptors = (descriptors: any) => {
   const root = AElf.pbjs.Root.fromDescriptor(descriptors, 'proto3').resolveAll();
@@ -206,19 +206,19 @@ export function transformArrayToMap(inputType: any, origin: any[]) {
   return result;
 }
 
-export async function getContractMethods(chainId: ChainId, address: string) {
-  const fds = await getContractFileDescriptorSet(chainId, address);
-  const services = getServicesFromFileDescriptors(fds);
-  const obj: any = {};
-  Object.keys(services).forEach((key) => {
-    const service = services[key];
-    Object.keys(service.methods).forEach((key) => {
-      const method = service.methods[key].resolve();
-      obj[method.name] = method.resolvedRequestType;
-    });
-  });
-  return obj;
-}
+// export async function getContractMethods(chainId: ChainId, address: string) {
+//   const fds = await getContractFileDescriptorSet(chainId, address);
+//   const services = getServicesFromFileDescriptors(fds);
+//   const obj: any = {};
+//   Object.keys(services).forEach((key) => {
+//     const service = services[key];
+//     Object.keys(service.methods).forEach((key) => {
+//       const method = service.methods[key].resolve();
+//       obj[method.name] = method.resolvedRequestType;
+//     });
+//   });
+//   return obj;
+// }
 
 export const isElfChainSymbol = (symbol?: string | null) => {
   if (symbol && symbol.length >= 2 && symbol.length <= 10 && isSymbol(symbol)) return symbol;

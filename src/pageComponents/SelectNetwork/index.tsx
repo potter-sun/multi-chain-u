@@ -1,5 +1,5 @@
 import { Swap } from 'assets/images';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NetworkItem } from 'types/api';
 import styles from './styles.module.scss';
 import { useCommon } from 'store/Provider/hooks';
@@ -7,12 +7,28 @@ import NetworkSelectDrawer from 'pageComponents/NetworkSelectDrawer';
 import NetworkSelectDropdown from 'pageComponents/NetworkSelectDropdown';
 import clsx from 'clsx';
 
-export default function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
+type NetworkSelectProps = {
+  networkList: NetworkItem[];
+  value?: NetworkItem;
+  onChange?: (item: NetworkItem) => void;
+};
+
+export default function SelectNetwork({ networkList, value, onChange }: NetworkSelectProps) {
   const [isShowNetworkSelectDropdown, setIsShowNetworkSelectDropdown] = useState<boolean>(false);
   const [selected, setSelected] = useState<NetworkItem>();
 
+  useEffect(() => {
+    if (value) {
+      setSelected(value);
+    }
+  }, [value]);
+
   const onSelectNetwork = (item: NetworkItem) => {
-    setSelected(item);
+    if (onChange) {
+      onChange(item);
+    } else {
+      setSelected(item);
+    }
     setIsShowNetworkSelectDropdown(false);
   };
   const { isMobilePX } = useCommon();

@@ -57,3 +57,12 @@ export function shortenString(address: string | null, chars = 10): string {
   if (!parsed) return '';
   return `${parsed.substring(0, chars)}...${parsed.substring(parsed.length - chars)}`;
 }
+
+export const formatWithThousandsSeparator = (value?: string | number | null) => {
+  return value?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || '';
+};
+
+export const parserWithThousandsSeparator = (value?: string | null) => {
+  const convertedValue = value?.replace(/,*/g, '');
+  return convertedValue ? Number(convertedValue) : undefined;
+};
