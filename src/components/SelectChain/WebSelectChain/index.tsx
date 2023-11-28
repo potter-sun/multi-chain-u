@@ -15,9 +15,9 @@ export default function WebSelectChain({
       menu={{
         items: menuItems,
         selectedKeys: [selectedItem.key],
-        onClick: (item) => {
-          onClick?.(CHAIN_LIST.find((chain) => chain.key === item.key) || CHAIN_LIST[0]);
-        },
+      }}
+      handleMenuClick={(item) => {
+        onClick?.(CHAIN_LIST.find((chain) => chain.key === item.key) || CHAIN_LIST[0]);
       }}>
       <div className={styles['trigger-text']}>{selectedItem.label}</div>
     </CommonDropdown>
