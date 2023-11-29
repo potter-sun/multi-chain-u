@@ -3,6 +3,25 @@
 @import 'src/assets/theme/breakpoint.scss';
 @import 'src/styles/variable.scss';
 
+.form-wrapper {
+  :global {
+    .ant-form-item-label {
+      padding-bottom: 4px;
+      label {
+        font-size: 14px;
+        line-height: 22px;
+        color: $secondary-text;
+        font-weight: $font-family-regular-weight;
+        font-family: $font-family-regular-family;
+      }
+    }
+  }
+}
+
+.info-wrapper {
+  gap: 8px;
+}
+
 .info-label,
 .info-value {
   font-size: 14px;
@@ -10,7 +29,6 @@
 }
 
 .info-label {
-  margin-right: 8px;
   color: $secondary-text;
   @extend .font-family-regular;
 }
@@ -23,6 +41,14 @@
 .info-value-big-font {
   font-size: 24px;
   line-height: 32px;
+}
+
+.info-wrapper-contract-address {
+  gap: 16px;
+  margin-bottom: 24px;
+  .info-label {
+    width: 120px;
+  }
 }
 
 .form-footer {
@@ -51,7 +77,22 @@
 }
 
 .transaction-info-wrapper {
-  gap: 16px;
+  @include media-mobile-and-pad {
+    flex-direction: column-reverse;
+    gap: 2px;
+    .info-label, .info-value {
+      font-size: 12px;
+      line-height: 16px;
+    }
+    .info-value-big-font {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+  @include media-web {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
 .form-submit-button-wrapper {
