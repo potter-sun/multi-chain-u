@@ -20,7 +20,7 @@ export const getTokenList = async (): Promise<GetTokenListResult> => {
 
 export const getNetworkList = async (): Promise<GetNetworkListResult> => {
   try {
-    const res = await request.deposit.getNetworkList({ baseURL: 'https://test.etrans.exchange' });
+    const res = await request.deposit.getNetworkList();
     return res.data;
   } catch (error) {
     throw new Error(handleErrorMessage(error, 'getNetworkList error'));
