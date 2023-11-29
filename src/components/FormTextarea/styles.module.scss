@@ -5,6 +5,7 @@
 .textarea-wrapper {
   @extend .form-item-wrapper;
   textarea {
+    min-height: 24px;
     padding: 0;
     @extend .form-item-value;
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Form, FormProps } from 'antd';
 import clsx from 'clsx';
 import SelectChainWrapper from 'pageComponents/SelectChainWrapper';
@@ -10,7 +10,7 @@ import DoubleCheckModal from './DoubleCheckModal';
 import SuccessModal from './SuccessModal';
 import FailModal from './FailModal';
 import { NetworkStatus, NetworkItem, WithdrawInfo } from 'types/api';
-import { formatWithThousandsSeparator } from 'utils/common';
+import { formatWithThousandsSeparator, parserWithThousandsSeparator } from 'utils/common';
 import { useCommon } from 'store/Provider/hooks';
 import styles from './styles.module.scss';
 
@@ -32,7 +32,7 @@ export default function WithdrawContent() {
   const [form] = Form.useForm<FormValuesType>();
 
   const [withdrawalInfo, setWithdrawalInfo] = useState<WithdrawInfo>({
-    maxAmount: '100,000',
+    maxAmount: '1,000,000',
     minAmount: '5',
     limitCurrency: 'USDT',
     totalLimit: '1,000,000',
@@ -61,11 +61,31 @@ export default function WithdrawContent() {
     setIsDoubleCheckModalOpen(true);
   };
 
+  const remainingLimitComponent = useMemo(() => {
+    return (
+      <div className={clsx('flex-row-center', styles['remaining-limit-wrapper'])}>
+        <span className={styles['remaining-limit-label']}>
+          {isMobilePX && '• '}Remaining Limit{isMobilePX && ':'}
+        </span>
+        <span className={styles['remaining-limit-value']}>
+          {withdrawalInfo.remainingLimit} {withdrawalInfo.limitCurrency} /{' '}
+          {withdrawalInfo.totalLimit} {withdrawalInfo.limitCurrency}
+        </span>
+      </div>
+    );
+  }, [
+    withdrawalInfo.limitCurrency,
+    withdrawalInfo.remainingLimit,
+    withdrawalInfo.totalLimit,
+    isMobilePX,
+  ]);
+
   return (
     <>
       <SelectChainWrapper mobileLabel="from" webLabel="Withdraw USDT from" />
       <div>
         <Form
+          className={styles['form-wrapper']}
           layout="vertical"
           requiredMark={false}
           form={form}
@@ -76,10 +96,8 @@ export default function WithdrawContent() {
             name={FormKeys.ADDRESS}
             rules={[{ required: true, message: 'Please input address!' }]}>
             <FormTextarea
-              placeholder="Enter an address"
-              value={form.getFieldsValue()[FormKeys.ADDRESS]}
-              onChange={(e) => {
-                form.setFieldValue(FormKeys.ADDRESS, e.target.value);
+              textareaProps={{
+                placeholder: 'Enter an address',
               }}
             />
           </Form.Item>
@@ -88,6 +106,7 @@ export default function WithdrawContent() {
             name={FormKeys.NETWORK}
             rules={[{ required: true, message: 'Please select network!' }]}>
             <SelectNetwork
+              isFormItem
               networkList={[
                 {
                   network: 'network',
@@ -99,39 +118,77 @@ export default function WithdrawContent() {
                   status: NetworkStatus.Health,
                 },
               ]}
-              value={form.getFieldsValue()[FormKeys.NETWORK]}
-              onChange={(value) => {
-                form.setFieldValue(FormKeys.NETWORK, value);
-              }}
             />
           </Form.Item>
+          <div className={clsx('flex-row-start', styles['info-wrapper-contract-address'])}>
+            <div className={clsx('flex-none', styles['info-label'])}>Contract Address</div>
+            <div
+              className={clsx(
+                'flex-1',
+                'text-right',
+                'text-underline',
+                'text-break',
+                styles['info-value'],
+              )}>
+              0xc2132D05D31c914a87C66C10748AEb04B58e8F
+            </div>
+          </div>
           <Form.Item
-            label="Withdrawal Amount"
+            label={
+              <div className={clsx('flex-row-between', styles['form-label-wrapper'])}>
+                <span className={styles['form-label']}>Withdrawal Amount</span>
+                {!isMobilePX && remainingLimitComponent}
+              </div>
+            }
             name={FormKeys.AMOUNT}
-            rules={[{ required: true, message: 'Please input amount!' }]}>
+            validateTrigger="onBlur"
+            rules={[
+              {
+                validator: (_, value) => {
+                  const parserNumber = Number(parserWithThousandsSeparator(value));
+                  if (!value) {
+                    return Promise.reject('Please input amount!');
+                  } else if (
+                    parserNumber < Number(parserWithThousandsSeparator(withdrawalInfo.minAmount))
+                  ) {
+                    return Promise.reject(`The minimum amount is ${withdrawalInfo.minAmount} USDT`);
+                  } else if (
+                    parserNumber > Number(parserWithThousandsSeparator(withdrawalInfo.maxAmount))
+                  ) {
+                    return Promise.reject('Insufficient balance.');
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}>
             <FormInputNumber
-              placeholder={`Minimum ${withdrawalInfo.minAmount}`}
-              min={withdrawalInfo.minAmount}
-              max={withdrawalInfo.maxAmount}
-              value={form.getFieldsValue()[FormKeys.AMOUNT]}
+              unit={withdrawalInfo.transactionUnit}
+              maxButtonConfig={{
+                onClick: () => {
+                  form.setFieldValue(FormKeys.AMOUNT, withdrawalInfo.maxAmount);
+                  form.validateFields([FormKeys.AMOUNT]);
+                },
+              }}
+              inputNumberProps={{
+                placeholder: `Minimum ${withdrawalInfo.minAmount}`,
+                formatter: formatWithThousandsSeparator,
+                parser: parserWithThousandsSeparator,
+              }}
               onChange={(value) => {
                 form.setFieldValue(FormKeys.AMOUNT, formatWithThousandsSeparator(value));
               }}
             />
           </Form.Item>
-          <div className={'flex-row-center'}>
+          <div className={clsx('flex-row-center', styles['info-wrapper'])}>
             <div className={styles['info-label']}>{withdrawalInfo.transactionUnit} Balance</div>
             <div className={styles['info-value']}>
               {balance} {withdrawalInfo.transactionUnit}
             </div>
           </div>
-          <div>
-            Remaining Limit: {withdrawalInfo.remainingLimit} {withdrawalInfo.limitCurrency}/
-            {withdrawalInfo.totalLimit} {withdrawalInfo.limitCurrency}
-          </div>
+          {isMobilePX && remainingLimitComponent}
           <div className={styles['form-footer']}>
             <div className={clsx('flex-1', 'flex-column', styles['transaction-info-wrapper'])}>
-              <div className={'flex-row-center'}>
+              <div className={clsx('flex-row-center', styles['info-wrapper'])}>
                 <div className={styles['info-label']}>Transaction Fee: </div>
                 <div className={styles['info-value']}>
                   {withdrawalInfo.transactionFee || '-'} {withdrawalInfo.transactionUnit}

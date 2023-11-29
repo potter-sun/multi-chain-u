@@ -1,6 +1,10 @@
+@import '/src/assets/theme/font.scss';
+@import '/src/assets/theme/color.scss';
+
 .form-item-wrapper {
   padding: 12px;
   border-radius: 6px;
+  border: none;
   background-color: $normal-bg;
 }
 
@@ -10,6 +14,7 @@
   line-height: 1.5;
   @extend .font-family-medium;
   &::placeholder {
+    color: #D4D4D4;
     @extend .font-family-medium;
   }
 }

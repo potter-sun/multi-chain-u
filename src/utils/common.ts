@@ -59,10 +59,11 @@ export function shortenString(address: string | null, chars = 10): string {
 }
 
 export const formatWithThousandsSeparator = (value?: string | number | null) => {
-  return value?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') || '';
+  return (
+    parserWithThousandsSeparator(value?.toString()).replace(/\B(?=(\d{3})+(?!\d))/g, ',') || ''
+  );
 };
 
 export const parserWithThousandsSeparator = (value?: string | null) => {
-  const convertedValue = value?.replace(/,*/g, '');
-  return convertedValue ? Number(convertedValue) : undefined;
+  return value?.replace(/,*/g, '') || '';
 };

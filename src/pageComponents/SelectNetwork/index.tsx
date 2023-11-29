@@ -5,15 +5,22 @@ import styles from './styles.module.scss';
 import { useCommon } from 'store/Provider/hooks';
 import NetworkSelectDrawer from 'pageComponents/NetworkSelectDrawer';
 import NetworkSelectDropdown from 'pageComponents/NetworkSelectDropdown';
+import Down from 'assets/images/down.svg';
 import clsx from 'clsx';
 
 type NetworkSelectProps = {
+  isFormItem?: boolean;
   networkList: NetworkItem[];
   value?: NetworkItem;
   onChange?: (item: NetworkItem) => void;
 };
 
-export default function SelectNetwork({ networkList, value, onChange }: NetworkSelectProps) {
+export default function SelectNetwork({
+  isFormItem,
+  networkList,
+  value,
+  onChange,
+}: NetworkSelectProps) {
   const [isShowNetworkSelectDropdown, setIsShowNetworkSelectDropdown] = useState<boolean>(false);
   const [selected, setSelected] = useState<NetworkItem>();
 
@@ -38,22 +45,36 @@ export default function SelectNetwork({ networkList, value, onChange }: NetworkS
       <div
         id="select-network-result"
         className={clsx(styles['select-network-result'], {
-          [styles['select-network-result-mobile']]: isMobilePX,
+          [styles['select-network-result-form-item']]: isFormItem,
         })}
         onClick={() => setIsShowNetworkSelectDropdown(true)}>
-        <div className={styles['select-network-label']}>From Network</div>
+        {!isFormItem && <div className={styles['select-network-label']}>From Network</div>}
         <div className={styles['select-network-value-row']}>
           <div className={styles['select-network-value']}>
             {selected?.network ? (
-              <span className={styles['select-network-value-selected']}>
-                <span className={styles['network']}>{selected.network}</span>
-                <span className={styles['name']}>{selected.name}</span>
+              <span className={clsx('flex-row-center', styles['select-network-value-selected'])}>
+                {isMobilePX ? (
+                  <span className={styles['primary']}>{selected.name}</span>
+                ) : (
+                  <>
+                    <span className={styles['primary']}>{selected.network}</span>
+                    <span className={styles['secondary']}>{selected.name}</span>
+                  </>
+                )}
               </span>
             ) : (
-              <span className={styles['select-network-value-placeholder']}>Select a network</span>
+              <span className={styles['select-network-value-placeholder']}>Select network</span>
             )}
           </div>
-          <Swap className={styles['select-network-swap-icon']} />
+          {isFormItem ? (
+            <Down
+              className={clsx({
+                [styles['select-network-down-icon-rotate']]: isShowNetworkSelectDropdown,
+              })}
+            />
+          ) : (
+            <Swap className={styles['select-network-swap-icon']} />
+          )}
         </div>
       </div>
 
