@@ -17,6 +17,8 @@ declare interface File extends Blob {
 }
 
 declare module 'aelf-sdk';
+declare module 'query-string';
+declare module 'qs';
 
 declare namespace AElf {
   function ajax(url: string, settings?: any): void;

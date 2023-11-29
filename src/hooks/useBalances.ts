@@ -10,5 +10,5 @@ export const useBalances = (contractAddress: string, methodName: string, args: a
       methodName,
       args,
     });
-  }, []);
+  }, [args, callViewMethod, contractAddress, methodName]);
 };

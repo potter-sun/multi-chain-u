@@ -33,12 +33,9 @@ export default function RootProviders({ children }: { children?: React.ReactNode
     bodyRootWrapper.classList.add(`${language}-language-wrapper`);
   }, [language]);
 
+  // TODO prefixCls={prefixCls}
   return (
-    <ConfigProvider
-      locale={ANTD_LOCAL[language]}
-      autoInsertSpaceInButton={false}
-      // prefixCls={prefixCls}
-    >
+    <ConfigProvider locale={ANTD_LOCAL[language]} autoInsertSpaceInButton={false}>
       <StoreProvider>
         <WebLoginProvider>{children}</WebLoginProvider>
       </StoreProvider>

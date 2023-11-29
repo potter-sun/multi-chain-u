@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BaseConfig, RequestConfig } from './types';
+import { stringify } from 'query-string';
 
 const axiosInstance = axios.create({
   baseURL: '/',
@@ -49,3 +50,37 @@ export function getRequestConfig(base: BaseConfig, config?: RequestConfig) {
     };
   }
 }
+
+type QueryAuthorizationBaseConfig = {
+  grant_type: string;
+  scope: string;
+  client_id: string;
+};
+type QueryAuthorizationExtraRequest = {
+  pubkey: string;
+  signature: string;
+  plain_text: string;
+  ca_hash: string;
+  chain_id: string;
+};
+const queryAuthorizationBaseConfig: QueryAuthorizationBaseConfig = {
+  grant_type: 'signature',
+  scope: 'ETransServer',
+  client_id: 'ETransServer_App',
+};
+export const queryAuthorization = async (config: QueryAuthorizationExtraRequest) => {
+  const data = { ...queryAuthorizationBaseConfig, ...config };
+  const { access_token, token_type }: any = await axios.post(
+    'http://192.168.11.143:8089/connect/token',
+    stringify(data),
+    {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    },
+  );
+  // const { access_token, token_type } = await request.auth.token({
+  //   baseURL: 'http://192.168.11.143:8089',
+  //   data: qs.stringify(data),
+  //   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  // });
+  return `${token_type} ${access_token}`;
+};
