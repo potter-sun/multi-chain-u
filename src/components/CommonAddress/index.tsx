@@ -12,8 +12,8 @@ interface CommonAddressProps {
 export default function CommonAddress({
   labelClassName,
   valueClassName,
-  label = 'MainChain AELF',
-  value = 'ELF_2DKgy7GafbrYWGnhSC3iSYgM9ZfudYS2KLLr1rDPLF9nZfWA6G_AELF',
+  label,
+  value,
 }: CommonAddressProps) {
   return (
     <div>

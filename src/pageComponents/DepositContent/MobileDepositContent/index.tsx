@@ -5,33 +5,37 @@ import CommonAddress from 'components/CommonAddress';
 import SelectNetwork from 'pageComponents/SelectNetwork';
 import DepositInfo from 'pageComponents/Deposit/DepositInfo';
 import DepositDescription from 'pageComponents/Deposit/DepositDescription';
-import { NetworkStatus } from 'types/api';
 import styles from './styles.module.scss';
+import { DepositContentProps } from '..';
+import CommonQRCode from 'components/CommonQRCode';
+import { DEPOSIT_ADDRESS_LABEL } from 'constants/deposit';
 
-export default function MobileDepositContent() {
+export default function MobileDepositContent({
+  networkList,
+  depositInfo,
+  qrCodeValue,
+  chainChanged,
+  networkChanged,
+}: DepositContentProps) {
   return (
     <>
-      <SelectChainWrapper className={styles['deposit-select-chain-wrapper']} mobileLabel="to" />
+      <SelectChainWrapper
+        className={styles['deposit-select-chain-wrapper']}
+        mobileLabel="to"
+        chainChanged={chainChanged}
+      />
       <div className={clsx('flex-row-content-center', styles['QR-code-wrapper'])}>
-        <div className={clsx('flex-none', styles['QR-code'])} />
+        {qrCodeValue ? (
+          <CommonQRCode value={qrCodeValue} />
+        ) : (
+          <div className={clsx('flex-none', styles['QR-code'])} />
+        )}
       </div>
       <div className={styles['data-wrapper']}>
-        <SelectNetwork
-          networkList={[
-            {
-              network: 'network',
-              name: 'name',
-              multiConfirm: 'multiConfirm',
-              multiConfirmTime: 'multiConfirmTime',
-              contractAddress: 'contractAddress',
-              explorerUrl: 'explorerUrl',
-              status: NetworkStatus.Health,
-            },
-          ]}
-        />
+        <SelectNetwork networkList={networkList} selectCallback={networkChanged} />
         <div className={styles['data-divider']} />
         <div className={styles['data-address-wrapper']}>
-          <CommonAddress />
+          <CommonAddress label={DEPOSIT_ADDRESS_LABEL} value={depositInfo.depositAddress} />
         </div>
       </div>
       <div className={styles['info-wrapper']}>

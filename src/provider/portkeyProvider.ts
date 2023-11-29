@@ -14,7 +14,8 @@ import elliptic from 'elliptic';
 import { zeroFill } from 'utils/calculate';
 import { LocalStorageKey } from 'constants/localStorage';
 import { sleep } from 'utils/common';
-import { did } from '@portkey/did-ui-react';
+import { did } from 'aelf-web-login';
+import { queryAuthToken } from 'api/utils';
 
 const ec = new elliptic.ec('secp256k1');
 export interface IPortkeyWalletInfo {
@@ -26,6 +27,7 @@ export interface IPortkeyWalletInfo {
   chainId?: string;
   matchNetworkType?: string;
   managerAddress?: string;
+  caHash?: string;
 }
 
 export interface IPortkeyWalletProvider extends IPortkeyWalletInfo {
@@ -66,6 +68,7 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
   public chainId?: ChainId;
   public matchNetworkType?: NetworkType;
   public managerAddress?: string;
+  public caHash?: string;
 
   constructor() {
     this.isActive = false;
@@ -74,7 +77,6 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
 
   public async init({ networkType }: PortkeyWalletProviderOptions) {
     this.setMatchNetworkType(networkType);
-    await this.getManagerAddress();
   }
 
   public setIsActive(isActive: boolean) {
@@ -147,15 +149,19 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
 
     this.setConnectInfo({ provider, walletName: name, accounts });
 
+    if (!this.caHash) {
+      await this.getCaHashByManagerAddress();
+    }
     await sleep(500);
+    await queryAuthToken('AELF'); // TODO
   }
 
   public deactivate() {
     if (!this.accounts) throw Error('no active connection');
     this.setDisconnectInfo();
     // remove JWT info form localStorage
-    localStorage.removeItem(LocalStorageKey.TOKEN_TYPE);
-    localStorage.removeItem(LocalStorageKey.ACCESS_TOKEN);
+    // localStorage.removeItem(LocalStorageKey.TOKEN_TYPE);  // TODO
+    // localStorage.removeItem(LocalStorageKey.ACCESS_TOKEN); // TODO
     return true;
   }
 
@@ -208,6 +214,7 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
   }
 
   public async getManagerAddress() {
+    if (!this.provider || !this.provider?.request) return {}; // TODO
     const managerAddress = await this.provider?.request({
       method: MethodsWallet.GET_WALLET_CURRENT_MANAGER_ADDRESS,
     });
@@ -219,10 +226,11 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
     if (!this.managerAddress) {
       await this.getManagerAddress();
     }
-    const res = await did.didGraphQL.getHolderInfoByManager({
+    const res = await did.services.getHolderInfoByManager({
       chainId: 'AELF',
       manager: this.managerAddress || '',
     });
+    this.caHash = res[0]?.caHash || '';
     return res;
   }
 

@@ -3,42 +3,52 @@ import { request } from 'api';
 import {
   CreateWithdrawOrderRequest,
   CreateWithdrawOrderResult,
+  GetDepositInfoRequest,
   GetDepositInfoResult,
+  GetNetworkListRequest,
   GetNetworkListResult,
+  GetTokenListRequest,
   GetTokenListResult,
+  GetWithdrawInfoRequest,
   GetWithdrawInfoResult,
 } from 'types/api';
 
-export const getTokenList = async (): Promise<GetTokenListResult> => {
+export const getTokenList = async (params: GetTokenListRequest): Promise<GetTokenListResult> => {
   try {
-    const res = await request.deposit.getTokenList();
+    const res = await request.deposit.getTokenList({ params });
     return res.data;
   } catch (error) {
     throw new Error(handleErrorMessage(error, 'getTokenList error'));
   }
 };
 
-export const getNetworkList = async (): Promise<GetNetworkListResult> => {
+export const getNetworkList = async (
+  params: GetNetworkListRequest,
+): Promise<GetNetworkListResult> => {
   try {
-    const res = await request.deposit.getNetworkList({ baseURL: 'https://test.etrans.exchange' });
+    const res = await request.deposit.getNetworkList({ params });
     return res.data;
   } catch (error) {
     throw new Error(handleErrorMessage(error, 'getNetworkList error'));
   }
 };
 
-export const getDepositInfo = async (): Promise<GetDepositInfoResult> => {
+export const getDepositInfo = async (
+  params: GetDepositInfoRequest,
+): Promise<GetDepositInfoResult> => {
   try {
-    const res = await request.deposit.getDepositInfo();
+    const res = await request.deposit.getDepositInfo({ params });
     return res.data;
   } catch (error) {
     throw new Error(handleErrorMessage(error, 'getDepositInfo error'));
   }
 };
 
-export const getWithdrawInfo = async (): Promise<GetWithdrawInfoResult> => {
+export const getWithdrawInfo = async (
+  params: GetWithdrawInfoRequest,
+): Promise<GetWithdrawInfoResult> => {
   try {
-    const res = await request.deposit.getWithdrawInfo();
+    const res = await request.deposit.getWithdrawInfo({ params });
     return res.data;
   } catch (error) {
     throw new Error(handleErrorMessage(error, 'getWithdrawInfo error'));

@@ -57,13 +57,7 @@ export type GetDepositInfoResult = {
 
 export type DepositInfo = {
   depositAddress: string;
-  maxAmount: string;
   minAmount: string;
-  limitCurrency: string;
-  totalLimit: string;
-  remainingLimit: string;
-  transactionFee: string;
-  transactionUnit: string;
 };
 
 export type GetWithdrawInfoRequest = {
