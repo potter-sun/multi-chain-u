@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Form, FormProps } from 'antd';
 import clsx from 'clsx';
 import SelectChainWrapper from 'pageComponents/SelectChainWrapper';
@@ -61,6 +61,25 @@ export default function WithdrawContent() {
     setIsDoubleCheckModalOpen(true);
   };
 
+  const remainingLimitComponent = useMemo(() => {
+    return (
+      <div className={clsx('flex-row-center', styles['remaining-limit-wrapper'])}>
+        <span className={styles['remaining-limit-label']}>
+          {isMobilePX && '• '}Remaining Limit{isMobilePX && ':'}
+        </span>
+        <span className={styles['remaining-limit-value']}>
+          {withdrawalInfo.remainingLimit} {withdrawalInfo.limitCurrency} /{' '}
+          {withdrawalInfo.totalLimit} {withdrawalInfo.limitCurrency}
+        </span>
+      </div>
+    );
+  }, [
+    withdrawalInfo.limitCurrency,
+    withdrawalInfo.remainingLimit,
+    withdrawalInfo.totalLimit,
+    isMobilePX,
+  ]);
+
   return (
     <>
       <SelectChainWrapper mobileLabel="from" webLabel="Withdraw USDT from" />
@@ -115,7 +134,12 @@ export default function WithdrawContent() {
             </div>
           </div>
           <Form.Item
-            label="Withdrawal Amount"
+            label={
+              <div className={clsx('flex-row-between', styles['form-label-wrapper'])}>
+                <span className={styles['form-label']}>Withdrawal Amount</span>
+                {!isMobilePX && remainingLimitComponent}
+              </div>
+            }
             name={FormKeys.AMOUNT}
             validateTrigger="onBlur"
             rules={[
@@ -161,10 +185,7 @@ export default function WithdrawContent() {
               {balance} {withdrawalInfo.transactionUnit}
             </div>
           </div>
-          <div>
-            Remaining Limit: {withdrawalInfo.remainingLimit} {withdrawalInfo.limitCurrency}/
-            {withdrawalInfo.totalLimit} {withdrawalInfo.limitCurrency}
-          </div>
+          {isMobilePX && remainingLimitComponent}
           <div className={styles['form-footer']}>
             <div className={clsx('flex-1', 'flex-column', styles['transaction-info-wrapper'])}>
               <div className={clsx('flex-row-center', styles['info-wrapper'])}>
