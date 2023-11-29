@@ -10,7 +10,10 @@ import {
 } from '@portkey/provider-types';
 import detectProvider from '@portkey/detect-provider';
 import { evokePortkey } from '@portkey/onboarding';
+import elliptic from 'elliptic';
+import { zeroFill } from 'utils/calculate';
 
+const ec = new elliptic.ec('secp256k1');
 export interface IPortkeyWalletInfo {
   isActive: boolean; // is connected
   walletName: string;
@@ -89,7 +92,6 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
 
   public setMatchNetworkType(networkType: NetworkType) {
     this.matchNetworkType = networkType;
-    console.log('🌈 🌈 🌈 🌈 🌈 🌈 this.matchNetworkType', this.matchNetworkType);
   }
 
   // portkey wallet network changed
@@ -191,6 +193,42 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
     this.provider.removeListener(NotificationEvents.NETWORK_CHANGED, this.networkChanged);
     this.provider.removeListener(NotificationEvents.CONNECTED, this.connected);
     this.provider.removeListener(NotificationEvents.DISCONNECTED, this.disconnected);
+  }
+
+  public getManagerAddress() {
+    return this.provider?.request({ method: MethodsWallet.GET_WALLET_CURRENT_MANAGER_ADDRESS });
+  }
+
+  public async getSignature(data: string) {
+    if (!this.provider || !this.provider?.request) return {}; // TODO
+    const signature = await this.provider.request({
+      method: MethodsWallet.GET_WALLET_SIGNATURE,
+      payload: { data },
+    });
+    if (!signature || signature.recoveryParam == null) return {}; // TODO
+    const signatureStr = [
+      zeroFill(signature.r),
+      zeroFill(signature.s),
+      `0${signature.recoveryParam.toString()}`,
+    ].join('');
+    return { signature, signatureStr };
+  }
+
+  public async getManagerPublicKey(data: string) {
+    if (!this.provider || !this.provider?.request) return {}; // TODO
+
+    const { signature, signatureStr } = await this.getSignature(data);
+    if (!signature || signature.recoveryParam == null) return {}; // TODO
+
+    // recover pubkey by signature
+    const publicKey = ec.recoverPubKey(
+      Buffer.from(data.slice(0, 64), 'hex'),
+      signature,
+      signature.recoveryParam,
+    );
+    const pubKey = ec.keyFromPublic(publicKey).getPublic('hex');
+
+    return { signatureStr, pubKey };
   }
 }
 

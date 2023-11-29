@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import { useCommon } from 'store/Provider/hooks';
 import NetworkSelectDrawer from 'pageComponents/NetworkSelectDrawer';
 import NetworkSelectDropdown from 'pageComponents/NetworkSelectDropdown';
+import clsx from 'clsx';
 
 export default function SelectNetwork({ networkList }: { networkList: NetworkItem[] }) {
   const [isShowNetworkSelectDropdown, setIsShowNetworkSelectDropdown] = useState<boolean>(false);
