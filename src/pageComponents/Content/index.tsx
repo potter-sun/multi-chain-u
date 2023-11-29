@@ -7,7 +7,6 @@ import styles from './styles.module.scss';
 
 export default function Content() {
   const { activeMenuKey } = useCommon();
-  const content =
-    activeMenuKey === HomeMenuKey.Withdrawal ? <WithdrawContent /> : <DepositContent />;
+  const content = activeMenuKey === HomeMenuKey.Withdraw ? <WithdrawContent /> : <DepositContent />;
   return <div className={styles['content-container']}>{content}</div>;
 }

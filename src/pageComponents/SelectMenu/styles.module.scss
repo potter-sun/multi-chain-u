@@ -1,3 +1,6 @@
+@import 'src/assets/theme/color.scss';
+@import 'src/assets/theme/font.scss';
+
 .header-icon-wrapper {
   width: 32px;
   height: 32px;
@@ -5,4 +8,38 @@
 
 .header-icon {
   font-size: 20px;
+}
+
+.menu-drawer.menu-drawer-weight {
+  :global {
+    .ant-drawer-content {
+      border-radius: 0;
+    }
+    .ant-drawer-body {
+      padding: 0 0 16px 0;
+    }
+  }
+}
+
+.menu-item {
+  gap: 12px;
+  height: 56px;
+  padding: 16px 12px;
+  border-bottom: 1px solid $dividers;
+  color: $secondary-text;
+  font-size: 16px;
+  line-height: 1.5;
+  @extend .font-family-medium;
+  &.menu-item-active {
+    color: $normal;
+    background-color: $hover-bg;
+    .menu-item-icon {
+      background-color: $normal;
+    }
+  }
+  .menu-item-icon {
+    width: 20px;
+    height: 20px;
+    background-color: $secondary-text;
+  }
 }
