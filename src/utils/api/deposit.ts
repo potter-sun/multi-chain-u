@@ -7,7 +7,6 @@ import {
   GetNetworkListResult,
   GetTokenListResult,
   GetWithdrawInfoResult,
-  SendWithdrawTransactionRequest,
 } from 'types/api';
 
 export const getTokenList = async (): Promise<GetTokenListResult> => {
@@ -21,7 +20,7 @@ export const getTokenList = async (): Promise<GetTokenListResult> => {
 
 export const getNetworkList = async (): Promise<GetNetworkListResult> => {
   try {
-    const res = await request.deposit.getNetworkList();
+    const res = await request.deposit.getNetworkList({ baseURL: 'https://test.etrans.exchange' });
     return res.data;
   } catch (error) {
     throw new Error(handleErrorMessage(error, 'getNetworkList error'));
@@ -54,15 +53,5 @@ export const createWithdrawOrder = async (
     return res.data;
   } catch (error) {
     throw new Error(handleErrorMessage(error, 'createWithdrawOrder error'));
-  }
-};
-
-export const sendWithdrawTransaction = async (
-  params: SendWithdrawTransactionRequest,
-): Promise<void> => {
-  try {
-    await request.deposit.sendWithdrawTransaction({ data: params });
-  } catch (error) {
-    throw new Error(handleErrorMessage(error, 'sendWithdrawTransaction error'));
   }
 };

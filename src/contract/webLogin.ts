@@ -1,7 +1,7 @@
 import { CallContractParams } from 'aelf-web-login';
 import { WebLoginInterface } from 'aelf-web-login/dist/types/context';
 import { ChainId } from '@portkey/types';
-import { SupportedELFChainId } from 'constants/chain';
+import { AllSupportedELFChainId } from 'constants/chain';
 
 export interface IWebLoginArgs {
   address: string;
@@ -49,17 +49,17 @@ export default class WebLoginInstance {
     viewMethod: MethodType;
   }) {
     switch (chain) {
-      case SupportedELFChainId.AELF: {
+      case AllSupportedELFChainId.AELF: {
         this.aelfSendMethod = sendMethod;
         this.aelfViewMethod = viewMethod;
         break;
       }
-      case SupportedELFChainId.tDVV: {
+      case AllSupportedELFChainId.tDVV: {
         this.tdvvSendMethod = sendMethod;
         this.tdvvViewMethod = viewMethod;
         break;
       }
-      case SupportedELFChainId.tDVW: {
+      case AllSupportedELFChainId.tDVW: {
         this.tdvwSendMethod = sendMethod;
         this.tdvwViewMethod = viewMethod;
         break;
@@ -85,11 +85,11 @@ export default class WebLoginInstance {
 
   callSendMethod<T, R>(chain: ChainId, params: CallContractParams<T>): Promise<R> {
     switch (chain) {
-      case SupportedELFChainId.AELF:
+      case AllSupportedELFChainId.AELF:
         return this.aelfSendMethod!(params);
-      case SupportedELFChainId.tDVV:
+      case AllSupportedELFChainId.tDVV:
         return this.tdvvSendMethod!(params);
-      case SupportedELFChainId.tDVW:
+      case AllSupportedELFChainId.tDVW:
         return this.tdvwSendMethod!(params);
     }
     throw new Error('Error: Invalid chainId');
@@ -97,11 +97,11 @@ export default class WebLoginInstance {
 
   callViewMethod<T, R>(chain: ChainId, params: CallContractParams<T>): Promise<R> {
     switch (chain) {
-      case SupportedELFChainId.AELF:
+      case AllSupportedELFChainId.AELF:
         return this.aelfViewMethod!(params);
-      case SupportedELFChainId.tDVV:
+      case AllSupportedELFChainId.tDVV:
         return this.tdvvViewMethod!(params);
-      case SupportedELFChainId.tDVW:
+      case AllSupportedELFChainId.tDVW:
         return this.tdvwViewMethod!(params);
     }
     throw new Error('Error: Invalid chainId');

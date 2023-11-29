@@ -1,9 +1,23 @@
 import * as AELF from '../platform/AELF';
 import * as tDVV from '../platform/tDVV';
-import { SupportedELFChainId } from 'constants/chain';
 import { NetworkType } from '@portkey/provider-types';
 
 export const NETWORK_TYPE: NetworkType = 'MAIN';
+
+export enum SupportedELFChainId {
+  AELF = 'AELF',
+  tDVV = 'tDVV',
+}
+
+export const CHAIN_NAME: { [chainId in SupportedELFChainId]: string } = {
+  [SupportedELFChainId.AELF]: 'MainChain AELF',
+  [SupportedELFChainId.tDVV]: 'SideChain tDVV',
+};
+
+export enum CHAIN_NAME_ENUM {
+  'MainChain' = 'MainChain AELF',
+  'SideChain' = 'SideChain tDVV',
+}
 
 export const ACTIVE_CHAIN: any = {
   [SupportedELFChainId.AELF]: true,
@@ -11,6 +25,11 @@ export const ACTIVE_CHAIN: any = {
 };
 
 export type ChainConstantsType = typeof AELF | typeof tDVV;
+
+export const SupportedELFChain: { [k: string | number]: ChainConstantsType } = {
+  [SupportedELFChainId.AELF]: AELF,
+  [SupportedELFChainId.tDVV]: tDVV,
+};
 
 export const AelfReact = {
   [SupportedELFChainId.AELF]: {
@@ -22,3 +41,10 @@ export const AelfReact = {
     rpcUrl: tDVV.CHAIN_INFO.rpcUrl,
   },
 };
+
+export const AELF_NODES = {
+  AELF: AELF.CHAIN_INFO,
+  tDVV: tDVV.CHAIN_INFO,
+};
+
+export const ETransHost = 'https://etrans.exchange';

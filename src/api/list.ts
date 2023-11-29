@@ -23,7 +23,7 @@ const AuthList = {
     baseConfig: { method: 'POST' },
   },
 };
-
+// TODO etrans
 const DepositApiList = {
   getTokenList: '/api/app/token/list',
   getNetworkList: '/api/app/network/list',
@@ -31,10 +31,6 @@ const DepositApiList = {
   getWithdrawInfo: '/api/app/withdraw/info',
   createWithdrawOrder: {
     target: '/api/app/withdraw/order',
-    baseConfig: { method: 'POST' },
-  },
-  sendWithdrawTransaction: {
-    target: '/api/app/withdraw/transaction',
     baseConfig: { method: 'POST' },
   },
 };
