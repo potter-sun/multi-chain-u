@@ -11,12 +11,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@portkey/contracts": "^1.5.1",
     "@portkey/did-ui-react": "^1.5.1-alpha.8",
     "@portkey/provider-types": "^1.1.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@sentry/nextjs": "^7.19.0",
     "aelf-web-login": "1.1.4-alpha.4",
-    "antd": "^4.21.7",
     "axios": "^0.24.0",
     "clsx": "^2.0.0",
     "firebase": "^9.23.0",
@@ -55,6 +55,7 @@
     "lint-staged": "13.2.2",
     "next-babel-conditional-ssg-ssr": "^1.0.0",
     "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^10.0.1",
     "postcss-less": "^6.0.0",
     "prettier": "^2.2.1",
     "sass": "^1.69.5",
