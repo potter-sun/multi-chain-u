@@ -88,6 +88,7 @@ export default function WithdrawContent() {
             name={FormKeys.NETWORK}
             rules={[{ required: true, message: 'Please select network!' }]}>
             <SelectNetwork
+              isFormItem
               networkList={[
                 {
                   network: 'network',
