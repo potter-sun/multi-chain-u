@@ -1,7 +1,11 @@
 import * as AELF_Test from './AELF';
 import * as tDVV_Test from './tDVV';
-import { SupportedELFChainId } from 'constants/chain';
 import { NetworkType } from '@portkey/provider-types';
+
+export enum SupportedELFChainId {
+  AELF = 'AELF',
+  tDVV = 'tDVV',
+}
 
 export const NETWORK_TYPE: NetworkType = 'TESTNET';
 
@@ -25,8 +29,12 @@ export const AELF_NODES = {
 export const CHAIN_NAME: { [chainId in SupportedELFChainId]: string } = {
   [SupportedELFChainId.AELF]: 'MainChain AELF Testnet',
   [SupportedELFChainId.tDVV]: 'SideChain tDVV Testnet',
-  [SupportedELFChainId.tDVW]: 'SideChain tDVW Testnet',
 };
+
+export enum CHAIN_NAME_ENUM {
+  'MainChain' = 'MainChain AELF',
+  'SideChain' = 'SideChain tDVV',
+}
 
 export const AelfReact = {
   [SupportedELFChainId.AELF]: {

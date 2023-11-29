@@ -1,34 +1,8 @@
 import axios from 'axios';
 import { BaseConfig, RequestConfig } from './types';
 import { stringify } from 'query-string';
-
-const axiosInstance = axios.create({
-  baseURL: '/',
-  timeout: 50000,
-});
-
-axiosInstance.defaults.headers.common['x-csrf-token'] = 'AUTH_TOKEN';
-
-axiosInstance.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  (error) => {
-    Promise.reject(error);
-  },
-);
-
-axiosInstance.interceptors.response.use(
-  (response) => {
-    const res = response.data;
-    return res;
-  },
-  (error) => {
-    return Promise.reject(error);
-  },
-);
-
-export const service = axiosInstance;
+import { LocalStorageKey } from 'constants/localStorage';
+import { ETransHost } from 'constants/testnet';
 
 export function spliceUrl(baseUrl: string, extendArg?: string) {
   return extendArg ? baseUrl + '/' + extendArg : baseUrl;
@@ -71,12 +45,19 @@ const queryAuthorizationBaseConfig: QueryAuthorizationBaseConfig = {
 export const queryAuthorization = async (config: QueryAuthorizationExtraRequest) => {
   const data = { ...queryAuthorizationBaseConfig, ...config };
   const { access_token, token_type }: any = await axios.post(
-    'http://192.168.11.143:8089/connect/token',
+    `${ETransHost}/connect/token`,
     stringify(data),
     {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     },
   );
+
+  if (localStorage) {
+    // set JWT info for localStorage
+    localStorage?.setItem(LocalStorageKey.TOKEN_TYPE, token_type);
+    localStorage?.setItem(LocalStorageKey.ACCESS_TOKEN, access_token);
+  }
+
   // const { access_token, token_type } = await request.auth.token({
   //   baseURL: 'http://192.168.11.143:8089',
   //   data: qs.stringify(data),

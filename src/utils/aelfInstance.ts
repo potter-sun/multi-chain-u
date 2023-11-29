@@ -1,4 +1,4 @@
-import { SupportedELFChainId } from 'constants/chain';
+import { SupportedELFChainId } from 'constants/index';
 import { getAElf, getNodeByChainId } from './aelfUtils';
 import { aelf } from '@portkey/utils';
 

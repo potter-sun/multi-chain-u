@@ -102,16 +102,9 @@ export type CreateWithdrawOrderRequest = {
   amount: string;
   fromChainId: ChainId;
   toAddress: string;
+  rawTransaction: string;
 };
 
 export type CreateWithdrawOrderResult = {
   orderId: string;
-  withdrawAddress: string;
-};
-
-export type SendWithdrawTransactionRequest = {
-  orderId: string;
-  rawTransaction: string;
-  signature: string;
-  publicKey: string;
 };

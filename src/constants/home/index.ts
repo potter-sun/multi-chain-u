@@ -1,3 +1,5 @@
+import { CHAIN_NAME_ENUM } from 'constants/index';
+
 export enum SideMenuKey {
   Deposit = 'Deposit',
   Withdraw = 'Withdraw',
@@ -16,23 +18,18 @@ export const MENU_ITEMS = [
   },
 ];
 
-export enum ChainNameType {
-  MainChain = 'MainChain AELF',
-  SideChain = 'SideChain tDVV',
+export interface ChainNameItem {
+  key: CHAIN_NAME_ENUM;
+  label: CHAIN_NAME_ENUM;
 }
 
-export interface ChainItem {
-  key: ChainNameType;
-  label: ChainNameType;
-}
-
-export const CHAIN_LIST: ChainItem[] = [
+export const CHAIN_LIST: ChainNameItem[] = [
   {
-    key: ChainNameType.MainChain,
-    label: ChainNameType.MainChain,
+    key: CHAIN_NAME_ENUM.MainChain,
+    label: CHAIN_NAME_ENUM.MainChain,
   },
   {
-    key: ChainNameType.SideChain,
-    label: ChainNameType.SideChain,
+    key: CHAIN_NAME_ENUM.SideChain,
+    label: CHAIN_NAME_ENUM.SideChain,
   },
 ];

@@ -12,6 +12,9 @@ import detectProvider from '@portkey/detect-provider';
 import { evokePortkey } from '@portkey/onboarding';
 import elliptic from 'elliptic';
 import { zeroFill } from 'utils/calculate';
+import { LocalStorageKey } from 'constants/localStorage';
+import { sleep } from 'utils/common';
+import { did } from '@portkey/did-ui-react';
 
 const ec = new elliptic.ec('secp256k1');
 export interface IPortkeyWalletInfo {
@@ -21,10 +24,12 @@ export interface IPortkeyWalletInfo {
   provider?: IPortkeyProvider;
   chainIds?: ChainIds;
   chainId?: string;
+  matchNetworkType?: string;
+  managerAddress?: string;
 }
 
 export interface IPortkeyWalletProvider extends IPortkeyWalletInfo {
-  init: (props: PortkeyWalletProviderOptions) => void;
+  init: (props: PortkeyWalletProviderOptions) => Promise<void>;
   initListener: () => void;
   removeListener: () => void;
   setIsActive: (isActive: boolean) => void;
@@ -60,14 +65,16 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
   public chainIds?: ChainIds;
   public chainId?: ChainId;
   public matchNetworkType?: NetworkType;
+  public managerAddress?: string;
 
   constructor() {
     this.isActive = false;
     this.walletName = '';
   }
 
-  public init({ networkType }: PortkeyWalletProviderOptions) {
+  public async init({ networkType }: PortkeyWalletProviderOptions) {
     this.setMatchNetworkType(networkType);
+    await this.getManagerAddress();
   }
 
   public setIsActive(isActive: boolean) {
@@ -139,11 +146,16 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
     if (networkType !== this.matchNetworkType) throw Error('networkType error');
 
     this.setConnectInfo({ provider, walletName: name, accounts });
+
+    await sleep(500);
   }
 
   public deactivate() {
     if (!this.accounts) throw Error('no active connection');
     this.setDisconnectInfo();
+    // remove JWT info form localStorage
+    localStorage.removeItem(LocalStorageKey.TOKEN_TYPE);
+    localStorage.removeItem(LocalStorageKey.ACCESS_TOKEN);
     return true;
   }
 
@@ -195,8 +207,23 @@ class PortkeyWalletProvider implements IPortkeyWalletProvider {
     this.provider.removeListener(NotificationEvents.DISCONNECTED, this.disconnected);
   }
 
-  public getManagerAddress() {
-    return this.provider?.request({ method: MethodsWallet.GET_WALLET_CURRENT_MANAGER_ADDRESS });
+  public async getManagerAddress() {
+    const managerAddress = await this.provider?.request({
+      method: MethodsWallet.GET_WALLET_CURRENT_MANAGER_ADDRESS,
+    });
+    this.managerAddress = managerAddress;
+    return managerAddress;
+  }
+
+  public async getCaHashByManagerAddress() {
+    if (!this.managerAddress) {
+      await this.getManagerAddress();
+    }
+    const res = await did.didGraphQL.getHolderInfoByManager({
+      chainId: 'AELF',
+      manager: this.managerAddress || '',
+    });
+    return res;
   }
 
   public async getSignature(data: string) {
