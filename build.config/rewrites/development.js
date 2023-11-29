@@ -1,6 +1,8 @@
-const commonHost = 'https://localtest-applesign.portkey.finance';
+const commonHost = 'https://did-portkey-test.portkey.finance';
 
 const ETransHost = 'https://test.etrans.exchange';
+
+const GraphqlHost = 'https://dapp-portkey-test.portkey.finance';
 
 module.exports = [
   {
@@ -10,5 +12,9 @@ module.exports = [
   {
     source: '/api/:path*',
     destination: `${commonHost}/api/:path*`,
+  },
+  {
+    source: '/graphql/:path*',
+    destination: `${GraphqlHost}/Portkey_DID/PortKeyIndexerCASchema/graphql/:path*`,
   },
 ];

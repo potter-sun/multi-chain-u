@@ -7,16 +7,19 @@ setGlobalConfig({
   appName: AppName,
   chainId: 'AELF', // TODO
   networkType: 'MAIN',
-  portkey: {},
+  portkey: {
+    graphQLUrl: '/graphql',
+  },
   aelfReact: {
     appName: AppName,
-    nodes: AelfReact,
+    nodes: AelfReact, // TODO
   },
-  defaultRpcUrl: AelfReact.AELF.rpcUrl,
+  defaultRpcUrl: AelfReact.AELF.rpcUrl, // TODO
 });
 
 export default function Providers({ children }: { children: ReactNode }) {
   return (
+    // TODO
     <PortkeyProvider networkType={'MAIN'}>
       <WebLoginProvider
         nightElf={{

@@ -13,6 +13,7 @@ type NetworkSelectProps = {
   networkList: NetworkItem[];
   value?: NetworkItem;
   onChange?: (item: NetworkItem) => void;
+  selectCallback: (item: NetworkItem) => void;
 };
 
 export default function SelectNetwork({
@@ -20,6 +21,7 @@ export default function SelectNetwork({
   networkList,
   value,
   onChange,
+  selectCallback,
 }: NetworkSelectProps) {
   const [isShowNetworkSelectDropdown, setIsShowNetworkSelectDropdown] = useState<boolean>(false);
   const [selected, setSelected] = useState<NetworkItem>();
@@ -30,13 +32,16 @@ export default function SelectNetwork({
     }
   }, [value]);
 
-  const onSelectNetwork = (item: NetworkItem) => {
+  const onSelectNetwork = async (item: NetworkItem) => {
     if (onChange) {
       onChange(item);
     } else {
       setSelected(item);
     }
+
     setIsShowNetworkSelectDropdown(false);
+
+    await selectCallback(item);
   };
   const { isMobilePX } = useCommon();
 

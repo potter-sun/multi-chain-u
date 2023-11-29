@@ -1,7 +1,11 @@
-import { ChainItem } from 'constants/home';
+import { ChainNameItem } from 'constants/index';
 
 export interface CommonSelectChainProps {
-  menuItems: ChainItem[];
-  selectedItem: ChainItem;
-  onClick: (item: ChainItem) => void;
+  menuItems: ChainNameItem[];
+  selectedItem: ChainNameItem;
+  onClick: (item: ChainNameItem) => void;
+}
+
+export interface SelectChainProps {
+  clickCallback: (item: ChainNameItem) => void;
 }

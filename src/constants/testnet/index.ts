@@ -19,6 +19,22 @@ export enum CHAIN_NAME_ENUM {
   'SideChain' = 'SideChain tDVW',
 }
 
+export interface ChainNameItem {
+  key: SupportedELFChainId;
+  label: CHAIN_NAME_ENUM;
+}
+
+export const CHAIN_LIST: ChainNameItem[] = [
+  {
+    key: SupportedELFChainId.AELF,
+    label: CHAIN_NAME_ENUM.MainChain,
+  },
+  {
+    key: SupportedELFChainId.tDVW,
+    label: CHAIN_NAME_ENUM.SideChain,
+  },
+];
+
 export const ACTIVE_CHAIN: any = {
   [SupportedELFChainId.AELF]: true,
   [SupportedELFChainId.tDVW]: true,

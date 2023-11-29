@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { NETWORK_TYPE } from 'constants/index';
 import portkeyWalletProvider from 'provider/portkeyProvider';
 import { useAppDispatch } from 'store/Provider/hooks';
@@ -7,6 +7,8 @@ import {
   setDisconnectedAction,
 } from 'store/reducers/portkeyWallet/actions';
 import { initialPortkeyWalletState } from 'store/reducers/portkeyWallet/slice';
+import { sleep } from 'utils/common';
+import { useEffectOnce } from 'react-use';
 
 export interface PortkeyProviderResult {
   activate: () => Promise<void>;
@@ -17,13 +19,18 @@ export interface PortkeyProviderResult {
 export function usePortkeyProvider(): PortkeyProviderResult {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  const initProvider = useCallback(async () => {
+    await sleep(1000);
     portkeyWalletProvider.init({ networkType: NETWORK_TYPE });
     portkeyWalletProvider.initListener();
     return () => {
       portkeyWalletProvider.removeListener();
     };
   }, []);
+
+  useEffectOnce(() => {
+    initProvider();
+  });
 
   const activate = useCallback(async () => {
     await portkeyWalletProvider.activate();
