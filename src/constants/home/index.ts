@@ -1,4 +1,4 @@
-export enum HomeMenuKey {
+export enum SideMenuKey {
   Deposit = 'Deposit',
   Withdraw = 'Withdraw',
 }
@@ -6,13 +6,13 @@ export enum HomeMenuKey {
 export const MENU_ITEMS = [
   {
     icon: 'xxx',
-    key: HomeMenuKey.Deposit,
-    label: HomeMenuKey.Deposit,
+    key: SideMenuKey.Deposit,
+    label: SideMenuKey.Deposit,
   },
   {
     icon: 'xxx',
-    key: HomeMenuKey.Withdraw,
-    label: HomeMenuKey.Withdraw,
+    key: SideMenuKey.Withdraw,
+    label: SideMenuKey.Withdraw,
   },
 ];
 

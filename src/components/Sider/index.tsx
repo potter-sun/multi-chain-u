@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { setActiveMenuKey } from 'store/reducers/common/slice';
 import { store } from 'store/Provider/store';
 import { useCommon } from 'store/Provider/hooks';
-import { HomeMenuKey, MENU_ITEMS } from 'constants/home';
+import { SideMenuKey, MENU_ITEMS } from 'constants/home';
 import styles from './styles.module.scss';
 
 export default function Sider() {
@@ -13,7 +13,7 @@ export default function Sider() {
   useEffect(() => {
     // init activeMenuKey
     if (!activeMenuKey) {
-      store.dispatch(setActiveMenuKey(HomeMenuKey.Deposit));
+      store.dispatch(setActiveMenuKey(SideMenuKey.Deposit));
     }
   }, [activeMenuKey]);
   return (

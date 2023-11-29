@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import MenuOutlined from '@ant-design/icons/MenuOutlined';
 import CommonDrawer from 'components/CommonDrawer';
-import { MENU_ITEMS, HomeMenuKey } from 'constants/home';
+import { MENU_ITEMS, SideMenuKey } from 'constants/home';
 import { setActiveMenuKey } from 'store/reducers/common/slice';
 import { store } from 'store/Provider/store';
 import { useCommon } from 'store/Provider/hooks';
@@ -16,7 +16,7 @@ export default function SelectMenu() {
   useEffect(() => {
     // init activeMenuKey
     if (!activeMenuKey) {
-      store.dispatch(setActiveMenuKey(HomeMenuKey.Deposit));
+      store.dispatch(setActiveMenuKey(SideMenuKey.Deposit));
     }
   }, [activeMenuKey]);
 
