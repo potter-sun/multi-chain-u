@@ -18,3 +18,5 @@ export const mediaQueries = {
   xl: `@media screen and ${media.xl}`,
   xxl: `@media screen and ${media.xxl}`,
 };
+
+export const MOBILE_PX = 1024;

@@ -1,8 +1,9 @@
 @import '/src/assets/theme/color.scss';
 @import 'src/assets/theme/font.scss';
+@import 'src/styles/variable.scss';
 
 .menu-container {
-  width: 253px;
+  width: $sider-width;
   padding-top: 40px;
 }
 .menu-items-wrapper {

@@ -1,0 +1,32 @@
+@import 'src/assets/theme/font.scss';
+@import 'src/assets/theme/color.scss';
+
+.deposit-select-chain-wrapper {
+  margin-bottom: 40px;
+}
+
+.QR-code-wrapper,
+.data-wrapper,
+.info-wrapper {
+  margin-bottom: 24px;
+}
+
+.QR-code {
+  width: 164px;
+  height: 164px;
+  background-color: #eee;
+}
+
+.data-wrapper {
+  border: 1px solid $dividers;
+  border-radius: 6px;
+}
+
+.data-divider {
+  margin: 0px 12px;
+  border-top: 1px solid $dividers;
+}
+
+.data-address-wrapper {
+  padding: 16px 12px;
+}

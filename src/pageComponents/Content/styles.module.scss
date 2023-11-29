@@ -1,0 +1,23 @@
+@import 'src/assets/theme/breakpoint.scss';
+@import 'src/styles/variable.scss';
+
+$web-content-min-margin-left: 40px;
+$web-breakpoint: $content-width + ($sider-width + $web-content-min-margin-left) * 2;
+
+.content-container {
+  @include media-mobile {
+    padding: 0 16px;
+  }
+  @include media-pad {
+    width: $content-width;
+    margin: auto;
+  }
+  @include media-web {
+    width: $content-width;
+    margin-left: calc((100vw - $content-width) / 2 - $sider-width);
+    padding-top: 40px;
+    @media screen and (max-width: $web-breakpoint) {
+      margin-left: $web-content-min-margin-left;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import 'src/assets/theme/font.scss';
+@import 'src/assets/theme/color.scss';
+@import 'src/styles/common.scss';
+
+.textarea-wrapper {
+  @extend .form-item-wrapper;
+  textarea {
+    padding: 0;
+    @extend .form-item-value;
+  }
+}
+    

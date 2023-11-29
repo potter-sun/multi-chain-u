@@ -5,9 +5,10 @@ import Header from 'components/Header';
 import Sider from 'components/Sider';
 import Loading from 'components/Loading';
 import { devices } from '@portkey/utils';
-import { setIsMobile } from 'store/reducers/common/slice';
+import { setIsMobile, setIsMobilePX } from 'store/reducers/common/slice';
 import { store } from 'store/Provider/store';
 import { useCommon } from 'store/Provider/hooks';
+import { MOBILE_PX } from 'constants/media';
 import clsx from 'clsx';
 import styles from './styles.module.scss';
 
@@ -22,6 +23,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           mobileType.apple.tablet ||
           mobileType.android.tablet;
         store.dispatch(setIsMobile(isMobileDevice));
+        const isMobilePX = window.innerWidth <= MOBILE_PX;
+        store.dispatch(setIsMobilePX(isMobilePX));
       };
       resize();
       window.addEventListener('resize', resize);
@@ -30,7 +33,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       };
     }
   }, []);
-  const { isMobile } = useCommon();
+  const { isMobilePX } = useCommon();
   return (
     <AntdLayout
       className={clsx(
@@ -40,7 +43,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       )}>
       <Header />
       <AntdLayout className={styles['layout-content-wrapper']}>
-        {!isMobile && <Sider />}
+        {!isMobilePX && <Sider />}
         <AntdLayout.Content className={`multi-chain-content`}>
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </AntdLayout.Content>

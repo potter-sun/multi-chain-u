@@ -1,0 +1,9 @@
+@import '/src/assets/theme/color.scss';
+
+.wallet-container {
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border: 1px solid $border;
+  border-radius: 6px;
+}

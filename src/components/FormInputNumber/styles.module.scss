@@ -1,0 +1,15 @@
+@import 'src/assets/theme/font.scss';
+@import 'src/assets/theme/color.scss';
+@import 'src/styles/common.scss';
+
+.input-number-wrapper {
+  @extend .form-item-wrapper;
+  input {
+    padding: 0;
+    @extend .form-item-value;
+  }
+}
+
+.input-number {
+  width: 100%;
+}

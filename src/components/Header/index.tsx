@@ -8,12 +8,12 @@ import { useCommon } from 'store/Provider/hooks';
 export type DefaultHeadProps = { title?: string; description?: string; };
 
 export default function Header(props: DefaultHeadProps) {
-  const { isMobile } = useCommon();
+  const { isMobilePX } = useCommon();
   return (
     <div>
       {/* <GoogleAnalytics id={process.env.NEXT_PUBLIC_ANALYTICS_ID} /> */}
       <DefaultHead {...props} />
-      {isMobile ? <MobileHeader /> : <WebHeader />}
+      {isMobilePX ? <MobileHeader /> : <WebHeader />}
     </div>
   );
 }
