@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { LoadingInfoType, setLoading } from '@portkey/did-ui-react';
+import { LoadingInfoType } from '@portkey/did-ui-react';
+import { setLoading } from 'aelf-web-login';
 import type { RootState, AppDispatch } from './store';
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
