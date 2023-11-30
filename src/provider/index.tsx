@@ -11,9 +11,9 @@ import { ANTD_LOCAL } from 'i18n/config';
 let childrenNode: any = undefined;
 const bodyRootWrapper = document.body;
 
-ConfigProvider.config({
-  prefixCls,
-});
+// ConfigProvider.config({
+//   prefixCls,
+// });
 
 initLanguage(localStorage);
 
